@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "889645030385",
+    "project_id": "event-places",
+    "storage_bucket": "event-places.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889645030385:android:2a9ce0586c37a9ba93c250",
+        "android_client_info": {
+          "package_name": "com.grupo2.EventPlaces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889645030385-3d7e0gir77dbmgkrf16dssnf6vht0gea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh3iS9LWzBL_pySGaChaGbbw4wt3MzJ5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889645030385-3d7e0gir77dbmgkrf16dssnf6vht0gea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

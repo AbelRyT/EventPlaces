@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.LoginPage"
+             Title="Login">
+    <Grid Padding="20" RowDefinitions="Auto, *">
+        <!-- Círculo con texto -->
+        <Frame Grid.Row="0"
+               CornerRadius="100"
+               HeightRequest="200"
+               WidthRequest="200"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               BackgroundColor="Transparent"
+               HasShadow="False">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#ADD8E6" Offset="0.0" />
+                    <GradientStop Color="#9370DB" Offset="1.0" />
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Label Text="Events Places"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="White"
+                   FontAttributes="Italic"
+                   FontSize="24"/>
+        </Frame>
+
+        <!-- Contenido debajo del círculo -->
+        <StackLayout Grid.Row="1" Spacing="15" Margin="0,80,0,0">
+            <!-- Correo Entry -->
+            <StackLayout>
+                <Label Text="Correo:" FontAttributes="Bold" TextColor="Black" />
+                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" BackgroundColor="White" Keyboard="Email" />
+            </StackLayout>
+            <!-- Contraseña Entry -->
+            <StackLayout>
+                <Label Text="Contraseña:" FontAttributes="Bold" TextColor="Black" />
+                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" IsPassword="True" BackgroundColor="White" />
+            </StackLayout>
+            <!-- Link para recuperar contraseña -->
+            <Label Text="¿Olvidaste tu contraseña?"
+                   FontAttributes="Italic"
+                   TextColor="Blue"
+                   HorizontalOptions="Center"
+                   FontSize="Small" />
+            <!-- Botón de Login -->
+            <Button Text="Login"
+                    BackgroundColor="LightPink"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Clicked="OnLoginClicked"/>
+            <!-- Link para crear cuenta -->
+            <Label Text="Crear Cuenta"
+                   FontAttributes="Italic"
+                   TextColor="Blue"
+                   HorizontalOptions="Center"
+                   FontSize="Small" >
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </Grid>
+</ContentPage>

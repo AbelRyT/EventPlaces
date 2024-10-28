@@ -16,7 +16,7 @@ namespace EventPlaces
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+    	//	builder.Logging.;
 #endif
 
             return builder.Build();
