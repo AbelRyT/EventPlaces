@@ -65,8 +65,8 @@
             </StackLayout>
 
             <!-- Footer Navigation -->
-            <Grid VerticalOptions="End" Padding="10" BackgroundColor="Black" HeightRequest="60">
-                <Grid.ColumnDefinitions>
+            <Grid VerticalOptions="End" Padding="10" BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
+                <Grid.ColumnDefinitions BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
