@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Ventanas.MainMenu"
+             Title="MainMenu">
+    <!-- Definición de Recursos (Colores) -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Colores -->
+            <Color x:Key="BackgroundColor">#dfefff</Color>
+            <Color x:Key="ButtonPink">#f5c1c1</Color>
+            <Color x:Key="IconBlue">#7aa7fa</Color>
+            <Color x:Key="IconGray">#b4b4b4</Color>
+            <Color x:Key="IconGreen">#76db83</Color>
+            <Color x:Key="IconPink">#ffc2d4</Color>
+            <Color x:Key="TabBarColor">#bccbd1</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- Configuración de fondo de la página -->
+    <ContentPage.BackgroundColor>
+        <StaticResource Key="BackgroundColor"/>
+    </ContentPage.BackgroundColor>
+
+    <!-- Estructura principal con Grid para organizar el contenido y la barra de navegación -->
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Contenido Principal -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout HorizontalOptions="Center" Padding="20">
+
+                <!-- Logo de la aplicación -->
+                <Image Source="logo.png" WidthRequest="100" HeightRequest="100" Margin="0,20,0,10" />
+
+                <!-- Modo oscuro/Modo claro -->
+                <ImageButton Source="moon_icon.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="End" />
+
+                <!-- Título de bienvenida -->
+                <Frame BackgroundColor="{StaticResource ButtonPink}" CornerRadius="20" Padding="10,5" HorizontalOptions="Center">
+                    <Label Text="WELCOME TO EVENT PLACES!" FontAttributes="Bold" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
+                </Frame>
+
+                <!-- Mensaje de bienvenida -->
+                <Label Text="Find the better place\nFor your next adventure!!" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" />
+
+                <!-- Botones principales -->
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10" Margin="0,20,0,0">
+                    <!-- Botón de Perfil -->
+                    <Button Text="Profile"
+                            BackgroundColor="{StaticResource IconBlue}"
+                            TextColor="White"
+                            ImageSource="profile_icon.png"
+                            CornerRadius="10"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+
+                    <!-- Botón de Buscar Lugar -->
+                    <Button Text="Find Place"
+                            BackgroundColor="{StaticResource IconGray}"
+                            TextColor="White"
+                            ImageSource="find_place_icon.png"
+                            CornerRadius="10"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                    <!-- Botón de Mis Lugares -->
+                    <Button Text="My Places"
+                            BackgroundColor="{StaticResource IconGreen}"
+                            TextColor="White"
+                            ImageSource="my_places_icon.png"
+                            CornerRadius="10"
+                            Grid.Row="1"
+                            Grid.Column="0" />
+
+                    <!-- Botón de Mis Pagos -->
+                    <Button Text="My Payments"
+                            BackgroundColor="{StaticResource IconPink}"
+                            TextColor="White"
+                            ImageSource="my_payments_icon.png"
+                            CornerRadius="10"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="{StaticResource TabBarColor}">
+            <ImageButton Source="home_icon.png" Grid.Column="0" />
+            <ImageButton Source="favorites_icon.png" Grid.Column="1" />
+            <ImageButton Source="upload_icon.png" Grid.Column="2" />
+            <ImageButton Source="inbox_icon.png" Grid.Column="3" />
+            <ImageButton Source="settings_icon.png" Grid.Column="4" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

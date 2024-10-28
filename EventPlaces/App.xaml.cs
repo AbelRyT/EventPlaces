@@ -1,4 +1,5 @@
-﻿namespace EventPlaces
+﻿using EventPlaces.Ventanas;
+namespace EventPlaces
 {
     public partial class App : Application
     {
@@ -6,7 +7,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new MainMenu();
         }
     }
 }
