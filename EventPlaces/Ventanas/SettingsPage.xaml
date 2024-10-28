@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Ventanas.SettingsPage"
+             Title="SettingsPage"
+             BackgroundColor="#E6DCE5">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <!-- Barra de navegación inferior -->
+            </Grid.RowDefinitions>
+
+            <!-- Contenido principal -->
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="10">
+
+                    <!-- Encabezado -->
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="0,20,0,20">
+                        <Frame BackgroundColor="#7A73FF" Padding="20" CornerRadius="20" WidthRequest="150">
+                            <Label Text="SETTINGS" FontAttributes="Bold" FontSize="Title" TextColor="White" HorizontalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Sección de Notificaciones -->
+                    <Label Text="NOTIFICATIONS" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <StackLayout Padding="10,5,10,5">
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="RECOMMENDATIONS" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="UPDATES" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="MESSAGE RECEIVED" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="LISTING HELPS" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <!-- Sección de Idiomas -->
+                    <Label Text="LANGUAGES" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <StackLayout Padding="10,5,10,5">
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="ENGLISH" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="False"/>
+                            <Label Text="SPANISH" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="False"/>
+                            <Label Text="FRANCES" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <!-- Sección de Moneda -->
+                    <Label Text="CURRENCY" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <StackLayout Padding="10,5,10,5">
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="US$ DOLLAR" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="False"/>
+                            <Label Text="DOP" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <!-- Sección de Apariencia -->
+                    <Label Text="APPEARANCE" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <StackLayout Padding="10,5,10,5">
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True"/>
+                            <Label Text="LIGHT THEME" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="False"/>
+                            <Label Text="DARK THEME" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Barra de navegación inferior -->
+            <Grid Grid.Row="1" HeightRequest="60" BackgroundColor="#7A73FF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Source="home_icon.png" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ImageButton Source="favorites_icon.png" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ImageButton Source="upload_icon.png" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ImageButton Source="inbox_icon.png" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ImageButton Source="settings_icon.png" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
