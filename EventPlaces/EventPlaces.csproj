@@ -66,6 +66,7 @@
 	  <None Remove="Resources\Images\my_payments_icon.png" />
 	  <None Remove="Resources\Images\my_places_icon.png" />
 	  <None Remove="Resources\Images\profile_icon.png" />
+	  <None Remove="Resources\Images\settings_icon.png" />
 	  <None Remove="Resources\Images\upload_icon.png" />
 	</ItemGroup>
 

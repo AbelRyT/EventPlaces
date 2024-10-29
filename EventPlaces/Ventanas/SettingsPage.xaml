@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Ventanas.SettingsPage"
              Title="SettingsPage"
-             BackgroundColor="#E6DCE5">
+             BackgroundColor="#bdcddc">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -18,72 +18,82 @@
 
                     <!-- Encabezado -->
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="0,20,0,20">
-                        <Frame BackgroundColor="#7A73FF" Padding="20" CornerRadius="20" WidthRequest="150">
+                        <Frame BackgroundColor="#7A73FF" Padding="10" CornerRadius="20" WidthRequest="150">
                             <Label Text="SETTINGS" FontAttributes="Bold" FontSize="Title" TextColor="White" HorizontalOptions="Center"/>
                         </Frame>
                     </StackLayout>
 
                     <!-- Sección de Notificaciones -->
-                    <Label Text="NOTIFICATIONS" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
+                        <Label Text="NOTIFICATIONS" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
                     <StackLayout Padding="10,5,10,5">
-                        <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="RECOMMENDATIONS" VerticalTextAlignment="Center" TextColor="Black"/>
+                        
+                        <StackLayout Orientation="Horizontal" >
+                            <!-- cambiar el checkbox a negro <CheckBox IsChecked="True" Color="Black" /> -->
+                            <CheckBox IsChecked="True" />
+                            <Label Text="RECOMMENDATIONS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="UPDATES" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="UPDATES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="MESSAGE RECEIVED" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="MESSAGE RECEIVED" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="LISTING HELPS" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="LISTING HELPS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Idiomas -->
-                    <Label Text="LANGUAGES" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
+                        <Label Text="LANGUAGES" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="ENGLISH" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="ENGLISH" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="False"/>
-                            <Label Text="SPANISH" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="SPANISH" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="False"/>
-                            <Label Text="FRANCES" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="FRANCES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Moneda -->
-                    <Label Text="CURRENCY" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
+                        <Label Text="CURRENCY" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="US$ DOLLAR" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="US$ DOLLAR" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="False"/>
-                            <Label Text="DOP" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="DOP" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Apariencia -->
-                    <Label Text="APPEARANCE" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" BackgroundColor="#FFC1CC" Padding="5"/>
+                    <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
+                        <Label Text="APPEARANCE" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="True"/>
-                            <Label Text="LIGHT THEME" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="LIGHT THEME" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="False"/>
-                            <Label Text="DARK THEME" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Text="DARK THEME" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
@@ -91,7 +101,7 @@
             </ScrollView>
 
             <!-- Barra de navegación inferior -->
-            <Grid Grid.Row="1" HeightRequest="60" BackgroundColor="#7A73FF">
+            <Grid Grid.Row="1"  Padding="10" HeightRequest="60" BackgroundColor="#a6a6a6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
