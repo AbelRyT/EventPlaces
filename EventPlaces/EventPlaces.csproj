@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Event Places\DescripcionReserva.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Event Places\Diseno1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
