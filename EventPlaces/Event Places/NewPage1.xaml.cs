@@ -54,6 +54,12 @@ namespace EventPlaces.Event_Places
             // Establecemos el contexto de datos para la página
             BindingContext = this;
         }
+
+        private async void OnLabelTapped(object sender, EventArgs e)
+        {
+            // Navegar a la nueva página
+            await Navigation.PushAsync(new Reservados());
+        }
     }
 
     // Definimos la clase Reservation

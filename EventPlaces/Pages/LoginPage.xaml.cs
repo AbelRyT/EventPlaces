@@ -1,4 +1,5 @@
 
+using EventPlaces.Event_Places;
 using Firebase.Auth;
 
 namespace EventPlaces.Pages;
@@ -27,7 +28,7 @@ public partial class LoginPage : ContentPage
             if (!string.IsNullOrEmpty(token))
             {
                 await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
-                await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new NewPage1());
             }
         }
         catch (Exception ex)

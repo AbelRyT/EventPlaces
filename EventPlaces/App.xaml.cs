@@ -8,7 +8,7 @@ namespace EventPlaces
         public App()
         {
             InitializeComponent();
-           MainPage = new hacerreservas();
+           MainPage = new AppShell();
            //MainPage = new Reservados();
            //MainPage = new NewPage1();
         }

@@ -36,6 +36,10 @@
                                BorderColor="Transparent" BackgroundColor="White"
                                HorizontalOptions="FillAndExpand">
 
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnLabelTapped" />
+                            </Frame.GestureRecognizers>
+                            
                             <!-- Se asegura de que el bloque ocupe todo el ancho -->
                             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="100, *" ColumnSpacing="15" HorizontalOptions="FillAndExpand">
 

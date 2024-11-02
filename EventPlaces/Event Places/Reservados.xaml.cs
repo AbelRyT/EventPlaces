@@ -58,6 +58,12 @@ namespace EventPlaces.Event_Places
             // Establecer el contexto de enlace de datos
             BindingContext = this;
         }
+
+        private async void OnLabelTapped(object sender, EventArgs e)
+        {
+            // Navegar a la nueva página
+            await Navigation.PushAsync(new hacerreservas());
+        }
     }
 
     // Modelo de datos para la reservación
