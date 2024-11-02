@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Ventanas.SellReport"
+             Title="SellReport"
+              BackgroundColor="#B0C4DE">
+
+    <Grid>
+        <!-- Definición de filas -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Contenido principal -->
+        <ScrollView Grid.Row="0">
+            <StackLayout Padding="20" Spacing="20">
+                <!-- Encabezado -->
+                <Label Text="SELL REPORTS"
+                       BackgroundColor="#4169E1"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Padding="10"
+                       WidthRequest="200"
+                       HorizontalTextAlignment="Center"
+                       FontSize="20"/>
+
+                <!-- Selección de Fechas -->
+                <Grid ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Fecha de inicio -->
+                    <Label Text="FROM" VerticalOptions="Center"/>
+                    <DatePicker x:Name="startDatePicker"
+                                Date="{Binding StartDate}"
+                                Format="MM/dd/yyyy"
+                                Grid.Row="0" Grid.Column="1"/>
+
+                    <!-- Fecha de fin -->
+                    <Label Text="TO" VerticalOptions="Center" Grid.Row="1"/>
+                    <DatePicker x:Name="endDatePicker"
+                                Date="{Binding EndDate}"
+                                Format="MM/dd/yyyy"
+                                Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Título personalizado de la tabla -->
+                <Label Text="Sell Reports"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="black"
+                       HorizontalOptions="Center"
+                       BackgroundColor="#D3D3D3"
+                       Padding="5,10"
+                       Margin="0,10,0,0"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Tabla para mostrar los datos -->
+                <Frame BorderColor="#D3D3D3"
+                       CornerRadius="5"
+                       HasShadow="True"
+                       Padding="10"
+                       BackgroundColor="#D3D3D3">
+                    <!-- Fondo gris claro -->
+                    <TableView Intent="Data"
+                               BackgroundColor="#D3D3D3">
+                        <!-- Fondo gris oscuro -->
+                        <TableRoot>
+                            <TableSection>
+                                <!-- Encabezados con línea divisora -->
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="#D3D3D3">
+                                        <!-- Fondo gris oscuro -->
+                                        <Label Text="DATE"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="StartAndExpand"
+                                               TextColor="White"
+                                               FontSize="18"/>
+                                        <!-- Texto blanco y más grande -->
+
+                                        <!-- Línea divisora -->
+                                        <BoxView WidthRequest="1"
+                                                 HeightRequest="20"
+                                                 Color="White"
+                                                 VerticalOptions="Center"/>
+
+                                        <Label Text="SELLED"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="EndAndExpand"
+                                               TextColor="White"
+                                               FontSize="18"/>
+                                        <!-- Texto blanco y más grande -->
+                                    </StackLayout>
+                                </ViewCell>
+                                <!-- Aquí se añadirán las filas de datos dinámicamente -->
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior -->
+        <Grid Grid.Row="1" BackgroundColor="#B0C4DE" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Text="Home" FontSize="12" TextColor="Black"/>
+            <Button Grid.Column="1" Text="Favorites" FontSize="12" TextColor="Black"/>
+            <Button Grid.Column="2" Text="Upload" FontSize="12" TextColor="Black"/>
+            <Button Grid.Column="3" Text="Inbox" FontSize="12" TextColor="Black"/>
+            <Button Grid.Column="4" Text="Settings" FontSize="12" TextColor="Black"/>
+        </Grid>
+    </Grid>
+</ContentPage>

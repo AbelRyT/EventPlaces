@@ -7,7 +7,7 @@ namespace EventPlaces
         {
             InitializeComponent();
 
-            MainPage = new MainMenu();
+            MainPage = new SellReport();
         }
     }
 }
