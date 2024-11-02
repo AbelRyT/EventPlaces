@@ -100,21 +100,28 @@
                 </StackLayout>
             </ScrollView>
 
-            <!-- Barra de navegación inferior -->
-            <Grid Grid.Row="1"  Padding="10" HeightRequest="60" BackgroundColor="#a6a6a6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <ImageButton Source="home_icon.png" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <ImageButton Source="favorites_icon.png" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <ImageButton Source="upload_icon.png" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <ImageButton Source="inbox_icon.png" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <ImageButton Source="settings_icon.png" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <!-- Barra de navegación inferior, íconos con nombres debajo -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton Source="home_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                    <Label Text="Home" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton Source="favorites_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                    <Label Text="Favorites" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton Source="upload_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                    <Label Text="Upload" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton Source="inbox_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                    <Label Text="Inbox" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton Source="settings_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                    <Label Text="Settings" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                </VerticalStackLayout>
             </Grid>
         </Grid>
     </ContentPage.Content>
