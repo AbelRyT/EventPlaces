@@ -7,7 +7,7 @@ namespace EventPlaces
         {
             InitializeComponent();
 
-            MainPage = new ProfilePage();
+            MainPage = new MainMenu();
         }
     }
 }

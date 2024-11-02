@@ -5,7 +5,7 @@
              BackgroundColor="#E6DCE5">
 
     <Grid>
-        <!-- Definición de las filas de la página -->
+        <!-- Definiciï¿½n de las filas de la pï¿½gina -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -75,7 +75,7 @@
             </Grid>
         </ScrollView>
 
-        <!-- Barra de navegación inferior -->
+        <!-- Barra de navegaciï¿½n inferior -->
         <Grid Grid.Row="1" Padding="10" HeightRequest="60" BackgroundColor="#a6a6a6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
