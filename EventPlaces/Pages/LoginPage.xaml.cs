@@ -1,5 +1,6 @@
 
 using EventPlaces.Event_Places;
+using EventPlaces.Ventanas;
 using Firebase.Auth;
 
 namespace EventPlaces.Pages;
@@ -22,14 +23,22 @@ public partial class LoginPage : ContentPage
     {
         try
         {
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
-            var auth = await authProvider.SignInWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
-            string token = auth.FirebaseToken;
-            if (!string.IsNullOrEmpty(token))
-            {
-                await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
-                await Navigation.PushAsync(new NewPage1());
-            }
+           
+            await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
+            await Navigation.PushAsync(new MainMenu());
+
+            //var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
+            //var auth = await authProvider.SignInWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
+            //string token = auth.FirebaseToken;
+            //if (!string.IsNullOrEmpty(token))
+            //{
+            //    await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
+            //    await Navigation.PushAsync(new MainMenu());
+            //}
+            //else
+            //{
+            //    await DisplayAlert("Autenticacion Invalidad", "Usuario o Contraseña Incorrecta", "OK");
+            //}
         }
         catch (Exception ex)
         {

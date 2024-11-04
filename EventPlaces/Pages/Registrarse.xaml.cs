@@ -14,7 +14,7 @@ public partial class Registrarse : ContentPage
         try
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
-            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
+            await authProvider.CreateUserWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
             await DisplayAlert("Éxito", "Usuario registrado correctamente", "OK");
             await Navigation.PushAsync(new LoginPage());
         }

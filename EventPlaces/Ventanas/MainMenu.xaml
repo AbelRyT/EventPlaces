@@ -50,7 +50,7 @@
                     <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="20" Margin="0,20,0,0">
 
                         <!-- Botón de Perfil -->
-                        <Frame BackgroundColor="{StaticResource IconBlue}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0">
+                        <Frame x:Name="PrincipalFrame" BackgroundColor="{StaticResource IconBlue}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped" />
                             </Frame.GestureRecognizers>
@@ -61,7 +61,7 @@
                         </Frame>
 
                         <!-- Botón de Buscar Lugar -->
-                        <Frame BackgroundColor="{StaticResource IconGray}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1">
+                        <Frame x:Name="FindPlaceFrame" BackgroundColor="{StaticResource IconGray}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped" />
                             </Frame.GestureRecognizers>
@@ -72,7 +72,7 @@
                         </Frame>
 
                         <!-- Botón de Mis Lugares -->
-                        <Frame BackgroundColor="{StaticResource IconGreen}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0">
+                        <Frame x:Name="MyPlacesFrame" BackgroundColor="{StaticResource IconGreen}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped" />
                             </Frame.GestureRecognizers>
@@ -83,7 +83,7 @@
                         </Frame>
 
                         <!-- Botón de Mis Pagos -->
-                        <Frame BackgroundColor="{StaticResource IconPink}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+                        <Frame x:Name="MyPaymentFrame" BackgroundColor="{StaticResource IconPink}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped" />
                             </Frame.GestureRecognizers>

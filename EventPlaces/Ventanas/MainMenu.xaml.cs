@@ -1,3 +1,4 @@
+using EventPlaces.Event_Places;
 using Microsoft.Maui.Controls;
 
 namespace EventPlaces.Ventanas
@@ -21,6 +22,8 @@ namespace EventPlaces.Ventanas
             {
                 await button.ScaleTo(1.2, 100);  // Escala a 1.2 en 100 ms
                 await button.ScaleTo(1.0, 100);  // Vuelve a escala 1.0 en 100 ms
+
+                await Navigation.PushAsync(new SettingsPage());
             }
         }
 
@@ -40,8 +43,17 @@ namespace EventPlaces.Ventanas
             if (sender is Frame frame)
             {
                 // Animación de escala al presionar el Frame completo
-                await frame.ScaleTo(0.9, 50, Easing.CubicIn);  // Reducir un poco el tamaño
-                await frame.ScaleTo(1, 50, Easing.CubicOut);   // Volver al tamaño normal
+                await frame.ScaleTo(0.9, 50, Easing.CubicIn);  
+                await frame.ScaleTo(1, 50, Easing.CubicOut);
+
+                if (frame == PrincipalFrame)
+                    await Navigation.PushAsync(new ProfilePage());
+                else if (frame == FindPlaceFrame)
+                    await Navigation.PushAsync(new NewPage1());
+                else if (frame == MyPaymentFrame)
+                    await Navigation.PushAsync(new SellReport());
+                else if (frame == MyPlacesFrame)
+                    await Navigation.PushAsync(new Reservados());
             }
         }
 
