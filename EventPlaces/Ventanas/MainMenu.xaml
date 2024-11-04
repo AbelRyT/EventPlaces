@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Ventanas.MainMenu"
+             Title="MainMenu">
+    <!-- Definición de Recursos (Colores) -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Colores -->
+            <Color x:Key="BackgroundColor">#dfefff</Color>
+            <Color x:Key="ButtonPink">#f5c1c1</Color>
+            <Color x:Key="IconBlue">#7aa7fa</Color>
+            <Color x:Key="IconGray">#b4b4b4</Color>
+            <Color x:Key="IconGreen">#76db83</Color>
+            <Color x:Key="IconPink">#ffc2d4</Color>
+            <Color x:Key="TabBarColor">#bccbd1</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- Configuración de fondo de la página -->
+    <ContentPage.BackgroundColor>
+        <StaticResource Key="BackgroundColor"/>
+    </ContentPage.BackgroundColor>
+
+    <!-- Estructura principal con Grid para organizar el contenido y la barra de navegación -->
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Contenido Principal -->
+        <ScrollView Grid.Row="0">
+            <AbsoluteLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" Padding="20" 
+                                     AbsoluteLayout.LayoutBounds="0.5, 0.1, -1, -1" 
+                                     AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <!-- Logo de la aplicación, centrado con bordes redondeados -->
+                    <Frame WidthRequest="140" HeightRequest="140" CornerRadius="70" BackgroundColor="White" Padding="0" HasShadow="True" Margin="0,20,0,10">
+                        <Image Source="logo.png" WidthRequest="120" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Título de bienvenida, centrado -->
+                    <Frame BackgroundColor="{StaticResource ButtonPink}" CornerRadius="20" Padding="10,5" HorizontalOptions="Center" Margin="0,10,0,0">
+                        <Label Text="WELCOME TO EVENT PLACES!" FontAttributes="Bold" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
+                    </Frame>
+
+                    <!-- Mensaje de bienvenida, cada línea separada -->
+                    <Label Text="Find the best place" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" />
+                    <Label Text="For your next adventure!" FontSize="Medium" HorizontalOptions="Center" TextColor="Black" />
+
+                    <!-- Botones principales -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="20" Margin="0,20,0,0">
+
+                        <!-- Botón de Perfil -->
+                        <Frame BackgroundColor="{StaticResource IconBlue}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image Source="profile_icon.png" WidthRequest="40" HeightRequest="40"/>
+                                <Label Text="Profile" FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Botón de Buscar Lugar -->
+                        <Frame BackgroundColor="{StaticResource IconGray}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image Source="find_place_icon.png" WidthRequest="40" HeightRequest="40"/>
+                                <Label Text="Find Place" FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Botón de Mis Lugares -->
+                        <Frame BackgroundColor="{StaticResource IconGreen}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image Source="my_places_icon.png" WidthRequest="40" HeightRequest="40"/>
+                                <Label Text="My Places" FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Botón de Mis Pagos -->
+                        <Frame BackgroundColor="{StaticResource IconPink}" CornerRadius="10" WidthRequest="160" HeightRequest="80" Padding="0" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image Source="my_payments_icon.png" WidthRequest="40" HeightRequest="40"/>
+                                <Label Text="My Payments" FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+                <!-- Modo oscuro/Modo claro, alineado en la esquina superior derecha con animación de selección -->
+                <Button x:Name="MoonButton"
+                    BackgroundColor="Transparent" 
+                    AbsoluteLayout.LayoutBounds="1,0, -1, -1"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Margin="0,10,10,0"
+                    Clicked="OnMoonButtonClicked">
+                    <Button.ImageSource>
+                        <FontImageSource Glyph="🌙" Size="30" />
+                    </Button.ImageSource>
+                </Button>
+
+
+            </AbsoluteLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior, íconos con nombres debajo -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
+            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="home_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Home" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="favorites_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Favorites" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="upload_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Upload" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="inbox_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Inbox" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="settings_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Settings" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

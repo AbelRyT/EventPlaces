@@ -57,7 +57,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
+	  <None Remove="Resources\Images\favorites_icon.png" />
+	  <None Remove="Resources\Images\find_place_icon.png" />
+	  <None Remove="Resources\Images\home_icon.png" />
+	  <None Remove="Resources\Images\inbox_icon.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\moon_icon.png" />
+	  <None Remove="Resources\Images\my_payments_icon.png" />
+	  <None Remove="Resources\Images\my_places_icon.png" />
+	  <None Remove="Resources\Images\profile_icon.png" />
+	  <None Remove="Resources\Images\settings_icon.png" />
+	  <None Remove="Resources\Images\upload_icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 	</ItemGroup>
@@ -94,6 +107,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Event Places\Reservados.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Ventanas\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Ventanas\SellReport.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Ventanas\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

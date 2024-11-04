@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Ventanas.ProfilePage"
+             BackgroundColor="#E6DCE5">
+
+    <Grid>
+        <!-- Definici�n de las filas de la p�gina -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Contenido principal con desplazamiento -->
+        <ScrollView Grid.Row="0">
+            <Grid Padding="20">
+                <!-- Header -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+                    <Frame BackgroundColor="#F7AFAE"
+                           CornerRadius="20"
+                           Padding="10"
+                           WidthRequest="200"
+                           HorizontalOptions="Center">
+                        <Label Text="USER PROFILE" 
+                               HorizontalOptions="Center"
+                               TextColor="Black"
+                               FontAttributes="Bold" />
+                    </Frame>
+                </StackLayout>
+
+                <!-- Profile Picture -->
+                <StackLayout VerticalOptions="Start" Margin="0,80,0,0" HorizontalOptions="Center">
+                    <Frame WidthRequest="100" HeightRequest="100" BackgroundColor="#7B61FF" CornerRadius="50">
+                        <Image Source="{Binding UserProfileImage}" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
+                    </Frame>
+                </StackLayout>
+
+                <!-- Main Info Section -->
+                <StackLayout VerticalOptions="Start" Margin="0,200,0,0">
+                    <Frame BackgroundColor="#F7AFAE" CornerRadius="10" Padding="5" Margin="0,10,0,0">
+                        <Label Text="MAIN INFO" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
+                    <StackLayout Padding="10">
+                        <Label Text="NAME:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="LAST NAME:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="ID OR PASSPORT:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="PHONE:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="EMAIL:" FontAttributes="Bold" TextColor="Black" />
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- App Info Section -->
+                <StackLayout VerticalOptions="Start" Margin="0,380,0,0">
+                    <Frame BackgroundColor="#F7AFAE" CornerRadius="10" Padding="5" Margin="0,10,0,0">
+                        <Label Text="APP INFO" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
+                    <StackLayout Padding="10">
+                        <Label Text="USER ID:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="PASSWORD:" FontAttributes="Bold" TextColor="Black" />
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Address Section -->
+                <StackLayout VerticalOptions="Start" Margin="0,480,0,0">
+                    <Frame BackgroundColor="#F7AFAE" CornerRadius="10" Padding="5" Margin="0,10,0,0">
+                        <Label Text="ADDRESS" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                    </Frame>
+                    <StackLayout Padding="10">
+                        <Label Text="COUNTRY:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="CITY:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="STREET:" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="HOUSE:" FontAttributes="Bold" TextColor="Black" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior, íconos con nombres debajo -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
+            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="home_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Home" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="favorites_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Favorites" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="upload_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Upload" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="inbox_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Inbox" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton Source="settings_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
+                <Label Text="Settings" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
