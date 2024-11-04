@@ -58,7 +58,7 @@ namespace EventPlaces.Event_Places
         private async void OnLabelTapped(object sender, EventArgs e)
         {
             // Navegar a la nueva página
-            await Navigation.PushAsync(new Reservados());
+            await Navigation.PushAsync(new DescripcionReserva());
         }
     }
 

@@ -46,36 +46,31 @@
                 </Grid>
             </Frame>
 
-
-
-
-
-
             <!-- Botón Fechas -->
-           <Grid Padding="0" Grid.Column="1">
-    <!-- Contenido del botón -->
-    <Frame BackgroundColor="#F0F0F0"
-           CornerRadius="25"
-           Padding="10"
-           HorizontalOptions="FillAndExpand"
-           VerticalOptions="Center">
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <!-- Ícono de Material Icons -->
-            <Label Text="&#xe916;"
-                   FontFamily="MaterialIcons"
-                   FontSize="18"
-                   VerticalOptions="Center"
-                   TextColor="Black" />
+            <Grid Padding="0" Grid.Column="1">
+                <!-- Contenido del botón -->
+                <Frame BackgroundColor="#F0F0F0"
+                    CornerRadius="25"
+                    Padding="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <!-- Ícono de Material Icons -->
+                        <Label Text="&#xe916;"
+                           FontFamily="MaterialIcons"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           TextColor="Black" />
 
-            <!-- Texto "Fechas" -->
-            <Label Text="Fechas"
+                        <!-- Texto "Fechas" -->
+                        <Label Text="Fechas"
                    FontSize="14"
                    VerticalOptions="Center"
                    TextColor="Black"
                    Margin="10,0,0,0" />
-        </StackLayout>
-    </Frame>
-</Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
 
 
             <!-- Botón Huéspedes -->
@@ -119,7 +114,7 @@
         <!-- Lista de Reservaciones -->
         <CollectionView Grid.Row="1" ItemsSource="{Binding Reservations}" 
                         SelectionMode="None"
-                        VerticalOptions="FillAndExpand"> 
+                        VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="0,10" HasShadow="True" CornerRadius="10">
