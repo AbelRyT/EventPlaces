@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Ventanas.SettingsPage"
-             Title="SettingsPage"
+             Title="Configuración"
              BackgroundColor="#bdcddc">
     <ContentPage.Content>
         <Grid>
@@ -16,84 +16,75 @@
             <ScrollView Grid.Row="0">
                 <StackLayout Padding="10">
 
-                    <!-- Encabezado -->
-                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="0,20,0,20">
-                        <Frame BackgroundColor="#7A73FF" Padding="10" CornerRadius="20" WidthRequest="150">
-                            <Label Text="SETTINGS" FontAttributes="Bold" FontSize="Title" TextColor="White" HorizontalOptions="Center"/>
-                        </Frame>
-                    </StackLayout>
-
                     <!-- Sección de Notificaciones -->
                     <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
-                        <Label Text="NOTIFICATIONS" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="NOTIFICACIONES" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
                     </Frame>
                     <StackLayout Padding="10,5,10,5">
-                        
-                        <StackLayout Orientation="Horizontal" >
-                            <!-- cambiar el checkbox a negro <CheckBox IsChecked="True" Color="Black" /> -->
-                            <CheckBox IsChecked="True" />
-                            <Label Text="RECOMMENDATIONS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="RECOMENDACIONES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="UPDATES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="ACTUALIZACIONES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="MESSAGE RECEIVED" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="MENSAJES RECIBIDOS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="LISTING HELPS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="AYUDA CON LISTADOS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Idiomas -->
                     <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
-                        <Label Text="LANGUAGES" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="IDIOMAS" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
                     </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="ENGLISH" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="INGLÉS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="False"/>
-                            <Label Text="SPANISH" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="False" Color="Black"/>
+                            <Label Text="ESPAÑOL" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="False"/>
-                            <Label Text="FRANCES" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="False" Color="Black"/>
+                            <Label Text="FRANCÉS" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Moneda -->
                     <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
-                        <Label Text="CURRENCY" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="MONEDA" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
                     </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="US$ DOLLAR" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="DÓLAR US$" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="False"/>
+                            <CheckBox IsChecked="False" Color="Black"/>
                             <Label Text="DOP" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
                     <!-- Sección de Apariencia -->
                     <Frame BackgroundColor="#FFC1CC" CornerRadius="20" Padding="5" Margin="0,10,0,0">
-                        <Label Text="APPEARANCE" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="APARIENCIA" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" />
                     </Frame>
                     <StackLayout Padding="10,5,10,5">
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="True"/>
-                            <Label Text="LIGHT THEME" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="True" Color="Black"/>
+                            <Label Text="TEMA CLARO" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="False"/>
-                            <Label Text="DARK THEME" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <CheckBox IsChecked="False" Color="Black"/>
+                            <Label Text="TEMA OSCURO" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
                         </StackLayout>
                     </StackLayout>
 
@@ -104,23 +95,23 @@
             <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="{StaticResource TabBarColor}" HeightRequest="60">
                 <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
                     <ImageButton Source="home_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
-                    <Label Text="Home" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                    <Label Text="Inicio" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
                     <ImageButton Source="favorites_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
-                    <Label Text="Favorites" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                    <Label Text="Favoritos" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
                     <ImageButton Source="upload_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
-                    <Label Text="Upload" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                    <Label Text="Subir" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
                     <ImageButton Source="inbox_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
-                    <Label Text="Inbox" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                    <Label Text="Mensajes" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center">
                     <ImageButton Source="settings_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
-                    <Label Text="Settings" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
+                    <Label Text="Configuración" FontSize="10" TextColor="Black" HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </Grid>
         </Grid>
