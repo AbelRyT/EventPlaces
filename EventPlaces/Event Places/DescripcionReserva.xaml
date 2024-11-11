@@ -58,24 +58,20 @@
 
             <VerticalStackLayout Spacing="10">
                 <!-- Bloque para Fechas -->
-                <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLabelTapped" />
+                    </Frame.GestureRecognizers>
                     <VerticalStackLayout>
                         <Label Text="📅 Fechas" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
                         <Label Text="1 Nov. - 5 Nov." FontSize="14" TextColor="Gray"/>
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Bloque para Personas -->
-                <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0">
-                    <VerticalStackLayout>
-                        <Label Text="👤 Personas" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
-                        <Label Text="2 Personas, 1 Habitación" FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
             </VerticalStackLayout>
 
             <!-- Botón para hacer la reserva -->
-            <Button Text="Hacer Reserva" BackgroundColor="Blue" Clicked="Button_Clicked" TextColor="White" FontAttributes="Bold" FontSize="18" CornerRadius="10" HeightRequest="50" Margin="0,10,0,0"/>
+            <Button Text="Hacer Reserva" Clicked="Button_Clicked" BackgroundColor="Blue" TextColor="White" FontAttributes="Bold" FontSize="18" CornerRadius="10" HeightRequest="50" Margin="0,10,0,0"/>
 
         </VerticalStackLayout>
     </ScrollView>

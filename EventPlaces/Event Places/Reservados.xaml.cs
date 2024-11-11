@@ -1,3 +1,4 @@
+using EventPlaces.Pages;
 using System.Collections.ObjectModel;
 
 namespace EventPlaces.Event_Places
@@ -63,6 +64,11 @@ namespace EventPlaces.Event_Places
         {
             // Navegar a la nueva página
             await Navigation.PushAsync(new hacerreservas());
+        }
+
+        private async void BtnEditar_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditarReservaPage());
         }
     }
 

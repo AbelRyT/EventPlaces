@@ -4,7 +4,6 @@
              x:Class="EventPlaces.Pages.Registrarse"
              Title="Registrarse">
     <Grid Padding="20" RowDefinitions="Auto, *">
-        <!-- Círculo con texto -->
         <Frame Grid.Row="0"
                CornerRadius="100"
                HeightRequest="200"
@@ -27,35 +26,47 @@
                    FontSize="24"/>
         </Frame>
 
-        <!-- Contenido debajo del círculo -->
         <StackLayout Grid.Row="1" Spacing="15" Margin="0,80,0,0">
-            <!-- Título -->
             <Label Text="Crear Cuenta"
                    FontSize="36"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="White" />
+
             <!-- Correo Entry -->
             <StackLayout>
                 <Label Text="Correo:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" BackgroundColor="White" Keyboard="Email" />
+                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" BackgroundColor="White" Keyboard="Email" Completed="OnEmailCompleted"/>
+                <Label x:Name="emailErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
             <!-- Contraseña Entry -->
             <StackLayout>
                 <Label Text="Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" IsPassword="True" BackgroundColor="White" />
+                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" IsPassword="True" BackgroundColor="White" Completed="OnPasswordCompleted"/>
+                <Label x:Name="passwordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
             <!-- Confirmar Contraseña Entry -->
             <StackLayout>
                 <Label Text="Confirmar Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry Placeholder="Confirma tu contraseña" IsPassword="True" BackgroundColor="White" />
+                <Entry x:Name="confirmPasswordEntry" Placeholder="Confirma tu contraseña" IsPassword="True" BackgroundColor="White" Completed="OnConfirmPasswordCompleted"/>
+                <Label x:Name="confirmPasswordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
             <!-- Botón de Registro -->
             <Button Text="Registrar"
                     BackgroundColor="LightPink"
                     TextColor="Black"
                     FontAttributes="Bold"
                     Clicked="OnRegisterClicked"/>
+
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsRunning="False" 
+                               IsVisible="False" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+
             <!-- Link para regresar a la pantalla de Login -->
             <Label Text="¿Ya tienes cuenta? Inicia sesión"
                    FontAttributes="Italic"

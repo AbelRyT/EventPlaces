@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.EditarReservaPage"
+             Title="Editar Reserva">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#b5d0e2" Offset="0.0" />
+            <GradientStop Color="#e8d5d8" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <!-- Título de la página -->
+            <Label Text="Editar Reserva"
+                   FontAttributes="Bold"
+                   FontSize="28"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Margin="0,20,0,10" />
+
+            <!-- Fecha de Inicio -->
+            <StackLayout>
+                <Label Text="Fecha de Inicio:" FontAttributes="Bold" TextColor="Black" />
+                <DatePicker x:Name="fechaInicioPicker" Date="{Binding FechaInicio}" />
+            </StackLayout>
+
+            <!-- Fecha de Fin -->
+            <StackLayout>
+                <Label Text="Fecha de Fin:" FontAttributes="Bold" TextColor="Black" />
+                <DatePicker x:Name="fechaFinPicker" Date="{Binding FechaFin}" />
+            </StackLayout>
+
+            <!-- Número de Huéspedes -->
+            <StackLayout>
+                <Label Text="Número de Huéspedes:" FontAttributes="Bold" TextColor="Black" />
+                <Entry x:Name="huespedesEntry" Keyboard="Numeric" Placeholder="Introduce el número de huéspedes" Text="{Binding NumeroHuespedes}" />
+            </StackLayout>
+
+            <!-- Botones de acción -->
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Guardar Cambios"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        Clicked="OnGuardarClicked"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Cancelar"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        Clicked="OnCancelarClicked"
+                        HorizontalOptions="FillAndExpand" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

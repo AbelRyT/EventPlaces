@@ -60,6 +60,49 @@ namespace EventPlaces.Event_Places
             // Navegar a la nueva página
             await Navigation.PushAsync(new DescripcionReserva());
         }
+
+        private async void LugarButton_Clicked(object sender, EventArgs e)
+        {
+            // Lógica para seleccionar o buscar un lugar
+            await DisplayAlert("Lugar", "Funcionalidad de selección de lugar en desarrollo", "OK");
+        }
+
+        private async void FechasButton_Clicked(object sender, EventArgs e)
+        {
+            // Lógica para seleccionar un rango de fechas
+            var startDate = await DisplayPromptAsync("Seleccionar Fechas", "Introduce la fecha de inicio (formato: dd/MM/yyyy):");
+            var endDate = await DisplayPromptAsync("Seleccionar Fechas", "Introduce la fecha de fin (formato: dd/MM/yyyy):");
+
+            if (!string.IsNullOrWhiteSpace(startDate) && !string.IsNullOrWhiteSpace(endDate))
+            {
+                DateTime start, end;
+                if (DateTime.TryParse(startDate, out start) && DateTime.TryParse(endDate, out end))
+                {
+                    await DisplayAlert("Fechas Seleccionadas", $"Desde: {start:dd/MM/yyyy} Hasta: {end:dd/MM/yyyy}", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Las fechas introducidas no son válidas", "OK");
+                }
+            }
+        }
+
+        private async void HuespedButton_Clicked(object sender, EventArgs e)
+        {
+            // Lógica para seleccionar la cantidad de huéspedes
+            var huespedes = await DisplayPromptAsync("Huéspedes", "Introduce el número de huéspedes:");
+            if (!string.IsNullOrWhiteSpace(huespedes))
+            {
+                await DisplayAlert("Huéspedes", $"Número de huéspedes: {huespedes}", "OK");
+            }
+        }
+
+        private async void BuscarButton_Clicked(object sender, EventArgs e)
+        {
+            // Lógica para realizar la búsqueda con los filtros seleccionados
+            await DisplayAlert("Buscar", "Funcionalidad de búsqueda en desarrollo", "OK");
+        }
+
     }
 
     // Definimos la clase Reservation

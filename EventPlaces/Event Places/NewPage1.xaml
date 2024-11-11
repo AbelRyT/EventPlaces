@@ -14,34 +14,35 @@
     <Grid Padding="10" RowDefinitions="Auto, *">
 
         <!-- Botones de búsqueda arriba de la lista -->
+        <!-- Botones de búsqueda arriba de la lista -->
         <Grid Padding="10" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" Grid.Row="0">
 
             <!-- Botón Lugar -->
             <Frame BackgroundColor="#F0F0F0"
-       CornerRadius="25"
-       Padding="0"
-       BorderColor="Black"  
-                Grid.Column="0">
+ CornerRadius="25"
+ Padding="0"
+ BorderColor="Black"  
+          Grid.Column="0">
 
                 <Grid Padding="10"
-          HorizontalOptions="FillAndExpand"
-          VerticalOptions="Center">
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Center">
 
                     <!-- Ícono de Material Icons -->
                     <Label Text="&#xe55f;"
-               FontFamily="MaterialIcons"
-               FontSize="18"
-               VerticalOptions="Center"
-               TextColor="Black"
-               Grid.Column="0" />
+         FontFamily="MaterialIcons"
+         FontSize="18"
+         VerticalOptions="Center"
+         TextColor="Black"
+         Grid.Column="0" />
 
                     <!-- Texto de ubicación -->
                     <Label Text=" ¿Lugar?"
-               FontSize="14"
-               VerticalOptions="Center"
-               TextColor="Black"
-               Grid.Column="1"
-               Margin="10,0,0,0" />
+         FontSize="14"
+         VerticalOptions="Center"
+         TextColor="Black"
+         Grid.Column="1"
+         Margin="10,0,0,0" />
 
                 </Grid>
             </Frame>
@@ -50,24 +51,24 @@
             <Grid Padding="0" Grid.Column="1">
                 <!-- Contenido del botón -->
                 <Frame BackgroundColor="#F0F0F0"
-                    CornerRadius="25"
-                    Padding="10"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="Center">
+              CornerRadius="25"
+              Padding="10"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="Center">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <!-- Ícono de Material Icons -->
                         <Label Text="&#xe916;"
-                           FontFamily="MaterialIcons"
-                           FontSize="18"
-                           VerticalOptions="Center"
-                           TextColor="Black" />
+                     FontFamily="MaterialIcons"
+                     FontSize="18"
+                     VerticalOptions="Center"
+                     TextColor="Black" />
 
                         <!-- Texto "Fechas" -->
                         <Label Text="Fechas"
-                   FontSize="14"
-                   VerticalOptions="Center"
-                   TextColor="Black"
-                   Margin="10,0,0,0" />
+             FontSize="14"
+             VerticalOptions="Center"
+             TextColor="Black"
+             Margin="10,0,0,0" />
                     </StackLayout>
                 </Frame>
             </Grid>
@@ -75,40 +76,40 @@
 
             <!-- Botón Huéspedes -->
             <Frame BackgroundColor="#F0F0F0"
-       CornerRadius="25"
-       Padding="0"
-       BorderColor="Black"
-       HasShadow="True"
-       Grid.Column="2">
+ CornerRadius="25"
+ Padding="0"
+ BorderColor="Black"
+ HasShadow="True"
+ Grid.Column="2">
                 <Grid Padding="10"
-          HorizontalOptions="FillAndExpand"
-          VerticalOptions="Center"
-          ColumnDefinitions="Auto, *">
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Center"
+    ColumnDefinitions="Auto, *">
                     <!-- Ícono de usuario (Material Icons) -->
                     <Label Text="&#xe7fd;"
-               FontFamily="MaterialIcons"
-               FontSize="18"
-               VerticalOptions="Center"
-               TextColor="Black" />
+         FontFamily="MaterialIcons"
+         FontSize="18"
+         VerticalOptions="Center"
+         TextColor="Black" />
                     <!-- Texto "Huéspedes" -->
                     <Label Text="   Huésped"
-               FontSize="12"
-               VerticalOptions="Center"
-               TextColor="Black"
-               Margin="10,0,0,0" />
+         FontSize="12"
+         VerticalOptions="Center"
+         TextColor="Black"
+         Margin="10,0,0,0" />
                 </Grid>
             </Frame>
 
 
             <!-- Botón Buscar -->
             <Button Text="Buscar" FontSize="14" 
-            BackgroundColor="#2E47EB" 
-            TextColor="White" 
-            CornerRadius="25"
-            Padding="10,5"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Center" 
-            Grid.Column="3" />
+      BackgroundColor="#2E47EB" 
+      TextColor="White" 
+      CornerRadius="25"
+      Padding="10,5"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="Center" 
+      Grid.Column="3" />
         </Grid>
 
         <!-- Lista de Reservaciones -->

@@ -30,16 +30,28 @@
 
         <!-- Contenido debajo del círculo -->
         <StackLayout Grid.Row="1" Spacing="15" Margin="0,80,0,0">
-            <!-- Correo Entry -->
+            
             <StackLayout>
                 <Label Text="Correo:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" BackgroundColor="White" Keyboard="Email" />
+                <Entry x:Name="emailEntry" 
+                       Placeholder="Introduce tu correo" 
+                       BackgroundColor="White" 
+                       Keyboard="Email" 
+                       Completed="OnEmailCompleted" />
+                <Label x:Name="emailErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
             <!-- Contraseña Entry -->
             <StackLayout>
                 <Label Text="Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" IsPassword="True" BackgroundColor="White" />
+                <Entry x:Name="passwordEntry" 
+                       Placeholder="Introduce tu contraseña" 
+                       IsPassword="True" 
+                       BackgroundColor="White" 
+                       Completed="OnPasswordCompleted" />
+                <Label x:Name="passwordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
             <!-- Link para recuperar contraseña -->
             <Label Text="¿Olvidaste tu contraseña?"
                    FontAttributes="Italic"
@@ -52,6 +64,14 @@
                     TextColor="Black"
                     FontAttributes="Bold"
                     Clicked="OnLoginClicked"/>
+
+            <!-- Indicador de carga -->
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsRunning="False" 
+                               IsVisible="False" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+
             <!-- Link para crear cuenta -->
             <Label Text="Crear Cuenta"
                    FontAttributes="Italic"

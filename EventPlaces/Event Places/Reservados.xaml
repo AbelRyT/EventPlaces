@@ -88,8 +88,8 @@
 
                                 <!-- Botones de Editar y Cancelar -->
                                 <StackLayout Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="End" Spacing="10" Margin="0,5,0,0">
-                                    <Button Text="Editar" BackgroundColor="#66BB6A" TextColor="White" CornerRadius="15" WidthRequest="80" HeightRequest="35" />
-                                    <Button Text="Cancelar" BackgroundColor="#EF5350" TextColor="White" CornerRadius="15" WidthRequest="90" HeightRequest="35"/>
+                                    <Button x:Name="BtnEditar" Text="Editar" Clicked="BtnEditar_Clicked" BackgroundColor="#66BB6A" TextColor="White" CornerRadius="15" WidthRequest="80" HeightRequest="35" />
+                                    <Button x:Name="BtnCancelar" Text="Cancelar" BackgroundColor="#EF5350" TextColor="White" CornerRadius="15" WidthRequest="90" HeightRequest="35"/>
                                 </StackLayout>
                             </Grid>
                         </Frame>
