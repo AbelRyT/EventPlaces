@@ -1,3 +1,5 @@
+using EventPlaces.Event_Places;
+
 namespace EventPlaces.Pages;
 
 public partial class EditarReservaPage : ContentPage
@@ -24,7 +26,7 @@ public partial class EditarReservaPage : ContentPage
 
         // Guardar los cambios (implementa la lógica para actualizar la reserva)
         await DisplayAlert("Éxito", "Reserva actualizada correctamente", "OK");
-        await Navigation.PopAsync(); // Volver a la pantalla anterior
+        await Navigation.PushAsync(new Reservados());// Volver a la pantalla anterior
     }
 
     private async void OnCancelarClicked(object sender, EventArgs e)
@@ -33,7 +35,7 @@ public partial class EditarReservaPage : ContentPage
         bool confirm = await DisplayAlert("Confirmación", "¿Estás seguro de que quieres cancelar los cambios?", "Sí", "No");
         if (confirm)
         {
-            await Navigation.PopAsync(); // Volver a la pantalla anterior
+            await Navigation.PushAsync(new Reservados()); // Volver a la pantalla anterior
         }
     }
 }

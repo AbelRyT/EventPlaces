@@ -70,6 +70,11 @@ namespace EventPlaces.Event_Places
         {
             await Navigation.PushAsync(new EditarReservaPage());
         }
+
+        private async void BtnCancelar_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CancelarReservaPage());
+        }
     }
 
     // Modelo de datos para la reservación

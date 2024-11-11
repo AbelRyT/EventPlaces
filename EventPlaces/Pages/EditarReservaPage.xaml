@@ -11,36 +11,47 @@
     </ContentPage.Background>
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15" Padding="20">
+        <VerticalStackLayout Spacing="10" Padding="10">
 
-            <!-- Título de la página -->
-            <Label Text="Editar Reserva"
-                   FontAttributes="Bold"
-                   FontSize="28"
-                   HorizontalOptions="Center"
-                   TextColor="Black"
-                   Margin="0,20,0,10" />
+            <!-- Imagen principal -->
+            <Border StrokeShape="RoundRectangle 10">
+                <Image Source="imagen1.jpg" Aspect="AspectFill" HeightRequest="200" />
+            </Border>
 
-            <!-- Fecha de Inicio -->
-            <StackLayout>
-                <Label Text="Fecha de Inicio:" FontAttributes="Bold" TextColor="Black" />
-                <DatePicker x:Name="fechaInicioPicker" Date="{Binding FechaInicio}" />
-            </StackLayout>
+            <!-- Título y detalles -->
+            <Grid ColumnDefinitions="*, Auto" Padding="0,10,0,0">
+                <Label Text="Editar Reserva - Emotions Puerto Plata" FontAttributes="Bold" FontSize="22" Grid.Column="0" TextColor="Black"/>
+            </Grid>
 
-            <!-- Fecha de Fin -->
-            <StackLayout>
-                <Label Text="Fecha de Fin:" FontAttributes="Bold" TextColor="Black" />
-                <DatePicker x:Name="fechaFinPicker" Date="{Binding FechaFin}" />
-            </StackLayout>
+            <!-- Descripción breve -->
+            <Label Text="Modifica los detalles de tu reserva." FontSize="14" TextColor="Black"/>
 
-            <!-- Número de Huéspedes -->
-            <StackLayout>
-                <Label Text="Número de Huéspedes:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="huespedesEntry" Keyboard="Numeric" Placeholder="Introduce el número de huéspedes" Text="{Binding NumeroHuespedes}" />
-            </StackLayout>
+            <!-- Bloque para editar la fecha de inicio -->
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                <VerticalStackLayout>
+                    <Label Text="📅 Fecha de Inicio" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
+                    <DatePicker x:Name="fechaInicioPicker" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Bloque para editar la fecha de fin -->
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                <VerticalStackLayout>
+                    <Label Text="📅 Fecha de Fin" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
+                    <DatePicker x:Name="fechaFinPicker" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Número de huéspedes -->
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                <VerticalStackLayout>
+                    <Label Text="👤 Número de Huéspedes" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
+                    <Entry x:Name="huespedesEntry" Placeholder="Introduce el número de huéspedes" Keyboard="Numeric" />
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Botones de acción -->
-            <HorizontalStackLayout Spacing="10">
+            <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
                 <Button Text="Guardar Cambios"
                         BackgroundColor="Green"
                         TextColor="White"
@@ -52,6 +63,7 @@
                         Clicked="OnCancelarClicked"
                         HorizontalOptions="FillAndExpand" />
             </HorizontalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

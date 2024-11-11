@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.CancelarReservaPage"
+             Title="Cancelar Reserva">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#f8b195" Offset="0.0" />
+            <GradientStop Color="#f67280" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <!-- Imagen y detalles de la reserva -->
+            <Border StrokeShape="RoundRectangle 10">
+                <Image Source="imagen_reserva.jpg" Aspect="AspectFill" HeightRequest="200" />
+            </Border>
+
+            <!-- Título de la reserva -->
+            <Label Text="Emotions Puerto Plata"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   TextColor="Black"
+                   Margin="0,10,0,0" />
+
+            <!-- Descripción breve -->
+            <Label Text="Reserva programada del 1 Nov. al 5 Nov."
+                   FontSize="16"
+                   TextColor="Gray"
+                   Margin="0,0,0,10" />
+
+            <!-- Detalles de huéspedes -->
+            <Label Text="👤 2 Personas, 1 Habitación"
+                   FontSize="14"
+                   TextColor="Black" />
+
+            <!-- Advertencia de cancelación -->
+            <Frame BackgroundColor="#FFCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   Margin="0,15,0,0">
+                <Label Text="⚠️ La cancelación de la reserva es irreversible. ¿Estás seguro de que quieres continuar?"
+                       FontSize="14"
+                       TextColor="Red"
+                       HorizontalOptions="Center" />
+            </Frame>
+
+            <!-- Botones de acción -->
+            <HorizontalStackLayout Spacing="15" Margin="0,20,0,0">
+                <Button Text="Confirmar Cancelación"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        Clicked="OnConfirmarCancelacionClicked"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold" />
+
+                <Button Text="Volver"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        Clicked="OnVolverClicked"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

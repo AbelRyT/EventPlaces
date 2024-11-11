@@ -81,6 +81,9 @@
 	  <MauiXaml Update="Event Places\SeleccionFechasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\CancelarReservaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\EditarReservaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
