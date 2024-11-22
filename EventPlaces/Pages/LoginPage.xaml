@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EventPlaces.Pages.LoginPage" Title="">
+             x:Class="EventPlaces.Pages.LoginPage" Title=""
+             BackgroundColor="#F0F8FF">
 
     <Grid Padding="20" RowDefinitions="Auto, *">
         <!-- Círculo con texto -->
@@ -11,7 +12,7 @@
                WidthRequest="200"
                HorizontalOptions="Center"
                VerticalOptions="Start"
-               BackgroundColor="Transparent"
+               BackgroundColor="black"
                HasShadow="False">
             <Frame.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -29,12 +30,13 @@
 
         <!-- Contenido debajo del círculo -->
         <StackLayout Grid.Row="1" Spacing="15" Margin="0,80,0,0">
-            
+
             <StackLayout>
-                <Label Text="Correo:" FontAttributes="Bold" TextColor="Black" />
+                <Label Text="Correo:" FontAttributes="Bold" TextColor="black" />
                 <Entry x:Name="emailEntry" 
                        Placeholder="Introduce tu correo" 
-                       BackgroundColor="White" 
+                       BackgroundColor="white"
+                       TextColor="black"
                        Keyboard="Email" 
                        Completed="OnEmailCompleted" />
                 <Label x:Name="emailErrorLabel" TextColor="Red" IsVisible="False"/>
@@ -42,14 +44,34 @@
 
             <!-- Contraseña Entry -->
             <StackLayout>
-                <Label Text="Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="passwordEntry" 
-                       Placeholder="Introduce tu contraseña" 
-                       IsPassword="True" 
-                       BackgroundColor="White" 
-                       Completed="OnPasswordCompleted" />
+                <Label Text="Contraseña:" FontAttributes="Bold" TextColor="black" />
+                <Grid>
+                    <!-- Campo de entrada de contraseña -->
+                    <Entry x:Name="passwordEntry" 
+                    Placeholder="Introduce tu contraseña" 
+                    IsPassword="{Binding IsPasswordVisible}" 
+                    BackgroundColor="White"
+                    TextColor="black"
+                    Completed="OnPasswordCompleted"
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand" />
+
+                    <!-- Botón de ojito -->
+                    <ImageButton x:Name="togglePasswordVisibilityButton"
+                     Source="eye_icon.png"
+                     BackgroundColor="Transparent"
+                     Grid.Column="1"
+                     WidthRequest="24"
+                     HeightRequest="24"
+                     Margin="0,0,10,0"
+                     VerticalOptions="Center"
+                     HorizontalOptions="End"
+                     Clicked="OnTogglePasswordVisibilityClicked" />
+                    
+                </Grid>
                 <Label x:Name="passwordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
+
 
             <!-- Link para recuperar contraseña -->
             <Label Text="¿Olvidaste tu contraseña?"
@@ -63,18 +85,21 @@
                 </Label.GestureRecognizers>
             </Label>
             <!-- Botón de Login -->
-            <Button Text="Login"
+            <Button x:Name="loginButton"
+                    Text="Login"
                     BackgroundColor="LightPink"
                     TextColor="Black"
                     FontAttributes="Bold"
-                    Clicked="OnLoginClicked"/>
+                    Clicked="OnLoginClicked"
+                    IsEnabled="{Binding IsLoginEnabled}" />
 
             <!-- Indicador de carga -->
             <ActivityIndicator x:Name="loadingIndicator" 
-                               IsRunning="False" 
-                               IsVisible="False" 
+                               IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}" 
                                HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
+                               VerticalOptions="Center"
+                               Color="Blue"/>
 
             <!-- Link para crear cuenta -->
             <Label Text="Crear Cuenta"

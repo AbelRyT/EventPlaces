@@ -2,12 +2,12 @@ using System.Collections.ObjectModel;
 
 namespace EventPlaces.Event_Places
 {
-    public partial class NewPage1 : ContentPage
+    public partial class MenuPrincipal : ContentPage
     {
         // La propiedad Reservations debe estar dentro de la clase
         public ObservableCollection<Reservation> Reservations { get; set; }
 
-        public NewPage1()
+        public MenuPrincipal()
         {
             InitializeComponent();
 

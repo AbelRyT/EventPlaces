@@ -1,6 +1,4 @@
-
 using EventPlaces.Event_Places;
-using EventPlaces.Ventanas;
 using Firebase.Auth;
 using System.Text.RegularExpressions;
 
@@ -8,9 +6,15 @@ namespace EventPlaces.Pages;
 
 public partial class LoginPage : ContentPage
 {
+    private bool isLoginInProgress = false; // Bandera para evitar múltiples ejecuciones
+    private bool isPasswordVisible = true; // Estado de visibilidad de la contraseña
+
     public LoginPage()
     {
         InitializeComponent();
+        isPasswordVisible = true; 
+    passwordEntry.IsPassword = isPasswordVisible;
+        UpdatePasswordVisibilityIcon(); // icono con que inicia la vista de la contraseña
     }
 
     private async void OnLabelTapped(object sender, EventArgs e)
@@ -21,18 +25,24 @@ public partial class LoginPage : ContentPage
 
     private void OnEmailCompleted(object sender, EventArgs e)
     {
-        passwordEntry.Focus(); // Pasa al siguiente campo (Contraseña)
+        passwordEntry.Focus(); 
     }
 
     private void OnPasswordCompleted(object sender, EventArgs e)
     {
-        // Aquí puedes llamar al método de login o hacer cualquier otra acción
+        
         OnLoginClicked(sender, e);
     }
 
-
     private async void OnLoginClicked(object sender, EventArgs e)
     {
+        // Verificar si ya hay un inicio de sesión en curso
+        if (isLoginInProgress)
+            return;
+
+        // Indicar que el inicio de sesión está en progreso
+        isLoginInProgress = true;
+        loginButton.IsEnabled = false; // Deshabilitar el botón
 
         bool isValid = true;
 
@@ -60,7 +70,7 @@ public partial class LoginPage : ContentPage
             passwordErrorLabel.IsVisible = false;
         }
 
-        // Si todo es válido, proceder con el login
+        
         if (isValid)
         {
             try
@@ -74,26 +84,35 @@ public partial class LoginPage : ContentPage
                 string token = auth.FirebaseToken;
                 if (!string.IsNullOrEmpty(token))
                 {
-                    await Navigation.PushAsync(new MainMenu());
+                    // Limpia los campos de entrada después de un inicio de sesión exitoso
+                    emailEntry.Text = string.Empty;
+                    passwordEntry.Text = string.Empty;
+
+                    await Navigation.PushAsync(new MenuPrincipal());
                 }
                 else
                 {
-                    await DisplayAlert("Autenticacion Invalidad", "Usuario o Contraseña Incorrecta", "OK");
+                    await DisplayAlert("Autenticación Inválida", "Usuario o Contraseña Incorrecta", "OK");
                 }
             }
             catch (Exception ex)
             {
-                if(ex.Message.Contains("INVALID_LOGIN_CREDENTIALS"))
-                    await DisplayAlert("Autenticacion Invalidad", "Usuario o Contraseña Incorrecta", "OK");
+                if (ex.Message.Contains("INVALID_LOGIN_CREDENTIALS"))
+                    await DisplayAlert("Autenticación Inválida", "Usuario o Contraseña Incorrecta", "OK");
                 else
                     await DisplayAlert("Error", $"No se pudo iniciar sesión: {ex.Message}", "OK");
             }
             finally
             {
+                // Ocultar el indicador de carga
                 loadingIndicator.IsRunning = false;
                 loadingIndicator.IsVisible = false;
             }
         }
+
+        // Reiniciar el estado del botón y la bandera
+        isLoginInProgress = false;
+        loginButton.IsEnabled = true;
     }
 
     private bool IsValidEmail(string email)
@@ -106,4 +125,40 @@ public partial class LoginPage : ContentPage
     {
         await Navigation.PushAsync(new OlvideMiPassword());
     }
+
+    private async void OnTogglePasswordVisibilityClicked(object sender, EventArgs e)
+    {
+        // Alternar visibilidad de la contraseña
+        if (isPasswordVisible)
+        {
+            isPasswordVisible = false;
+            passwordEntry.IsPassword = isPasswordVisible;
+
+            // Actualizar el ícono a "ojo cerrado"
+            UpdatePasswordVisibilityIcon();
+
+            // Esperar un segundo y volver a ocultar
+            await Task.Delay(1000);
+            isPasswordVisible = true;
+            passwordEntry.IsPassword = isPasswordVisible;
+
+            // Actualizar el ícono a "ojo abierto"
+            UpdatePasswordVisibilityIcon();
+        }
+        else
+        {
+            // Mostrar la contraseña mientras el botón está activado
+            isPasswordVisible = true;
+            passwordEntry.IsPassword = isPasswordVisible;
+
+            // Actualizar el ícono a "ojo abierto"
+            UpdatePasswordVisibilityIcon();
+        }
+    }
+
+    private void UpdatePasswordVisibilityIcon()
+    {
+        togglePasswordVisibilityButton.Source = isPasswordVisible ? "eye_icon.png" : "eye_off_icon.png";
+    }
+
 }

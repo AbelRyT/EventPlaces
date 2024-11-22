@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Pages.Registrarse"
-             Title="Registrarse">
+             Title="Registrarse"
+             BackgroundColor="#F0F8FF">
     <Grid Padding="20" RowDefinitions="Auto, *">
         <Frame Grid.Row="0"
                CornerRadius="100"
@@ -31,26 +32,26 @@
                    FontSize="36"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   TextColor="White" />
+                   TextColor="black" />
 
             <!-- Correo Entry -->
             <StackLayout>
                 <Label Text="Correo:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" BackgroundColor="White" Keyboard="Email" Completed="OnEmailCompleted"/>
+                <Entry x:Name="emailEntry" Placeholder="Introduce tu correo" TextColor="Black" BackgroundColor="White" Keyboard="Email" Completed="OnEmailCompleted"/>
                 <Label x:Name="emailErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
 
             <!-- Contraseña Entry -->
             <StackLayout>
                 <Label Text="Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" IsPassword="True" BackgroundColor="White" Completed="OnPasswordCompleted"/>
+                <Entry x:Name="passwordEntry" Placeholder="Introduce tu contraseña" TextColor="Black" IsPassword="True" BackgroundColor="White" Completed="OnPasswordCompleted"/>
                 <Label x:Name="passwordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
 
             <!-- Confirmar Contraseña Entry -->
             <StackLayout>
                 <Label Text="Confirmar Contraseña:" FontAttributes="Bold" TextColor="Black" />
-                <Entry x:Name="confirmPasswordEntry" Placeholder="Confirma tu contraseña" IsPassword="True" BackgroundColor="White" Completed="OnConfirmPasswordCompleted"/>
+                <Entry x:Name="confirmPasswordEntry" Placeholder="Confirma tu contraseña" TextColor="Black" IsPassword="True" BackgroundColor="White" Completed="OnConfirmPasswordCompleted"/>
                 <Label x:Name="confirmPasswordErrorLabel" TextColor="Red" IsVisible="False"/>
             </StackLayout>
 

@@ -50,7 +50,7 @@ namespace EventPlaces.Ventanas
                 if (frame == PrincipalFrame)
                     await Navigation.PushAsync(new PerfilUsuario());
                 else if (frame == FindPlaceFrame)
-                    await Navigation.PushAsync(new NewPage1());
+                    await Navigation.PushAsync(new MenuPrincipal());
                 else if (frame == MyPaymentFrame)
                     await Navigation.PushAsync(new SellReport());
                 else if (frame == MyPlacesFrame)
