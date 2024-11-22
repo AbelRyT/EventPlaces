@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.PagoReserva"
+ Title="Pagar Reserva">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#d7e7f3" Offset="0.0" />
+            <GradientStop Color="#f5d0c5" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <!-- Información de la reserva -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" Margin="0,0,0,15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Emotions Puerto Plata"
+                           FontAttributes="Bold"
+                           FontSize="22"
+                           TextColor="Black" />
+                    <Label Text="Del 1 Nov. al 5 Nov."
+                           FontSize="16"
+                           TextColor="Gray" />
+                    <Label Text="2 Personas, 1 Habitación"
+                           FontSize="14"
+                           TextColor="Black" />
+                    <Label Text="Precio Total: $9,500"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Green" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Formulario de pago -->
+            <Label Text="Detalles de Pago"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   Margin="0,0,0,10" />
+
+            <Entry Placeholder="Número de tarjeta"
+                   Keyboard="Numeric"
+                   MaxLength="16"
+                   BackgroundColor="#f0f0f0"
+                   />
+
+            <Entry Placeholder="Nombre en la tarjeta"
+                   BackgroundColor="#f0f0f0"
+                   />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Entry Placeholder="MM/AA"
+                       Keyboard="Numeric"
+                       BackgroundColor="#f0f0f0"
+                       Grid.Column="0" />
+
+                <Entry Placeholder="CVV"
+                       Keyboard="Numeric"
+                       MaxLength="3"
+                       BackgroundColor="#f0f0f0"
+                       Grid.Column="1" />
+            </Grid>
+
+            <!-- Botón de pago -->
+            <Button Text="Pagar Ahora"
+                    BackgroundColor="#2E86C1"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Clicked="OnPagarAhoraClicked"
+                    Margin="0,20,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

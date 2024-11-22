@@ -104,7 +104,7 @@
 
         <!-- Barra de navegación inferior, íconos con nombres en español -->
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" BackgroundColor="#4682B4" HeightRequest="60">
-            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+            <!--<VerticalStackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
                 <ImageButton Source="home_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
                 <Label Text="Inicio" FontSize="10" TextColor="White" HorizontalOptions="Center" />
             </VerticalStackLayout>
@@ -119,7 +119,7 @@
             <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
                 <ImageButton Source="inbox_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
                 <Label Text="Mensajes" FontSize="10" TextColor="White" HorizontalOptions="Center" />
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
             <VerticalStackLayout Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center">
                 <ImageButton Source="settings_icon.png" WidthRequest="30" HeightRequest="30" Clicked="OnNavButtonClicked"/>
                 <Label Text="Ajustes" FontSize="10" TextColor="White" HorizontalOptions="Center" />

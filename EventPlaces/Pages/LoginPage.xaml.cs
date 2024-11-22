@@ -101,4 +101,9 @@ public partial class LoginPage : ContentPage
         var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, emailPattern);
     }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new OlvideMiPassword());
+    }
 }

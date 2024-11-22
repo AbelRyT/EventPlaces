@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.PerfilUsuario"
+ Title="Perfil">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#d7e7f3" Offset="0.0" />
+            <GradientStop Color="#f5d0c5" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout Spacing="20" Padding="20"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <!-- Imagen de perfil -->
+            <Frame BackgroundColor="White" CornerRadius="75" HeightRequest="150" WidthRequest="150" HasShadow="True">
+                <Image Source="profile_placeholder.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" />
+            </Frame>
+
+            <!-- Información del usuario -->
+            <Label Text="Nombre del Usuario"
+               FontAttributes="Bold"
+               FontSize="24"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+
+            <Label Text="correo@ejemplo.com"
+               FontSize="16"
+               TextColor="Gray"
+               HorizontalOptions="Center" />
+
+            <!-- Botones de acciones -->
+            <Button Text="Editar Perfil"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnEditarPerfilClicked" />
+
+            <Button Text="Cambiar Contraseña"
+                BackgroundColor="#FF9800"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnCambiarContrasenaClicked" />
+
+            <Button Text="Cerrar Sesión"
+                BackgroundColor="#F44336"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnCerrarSesionClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

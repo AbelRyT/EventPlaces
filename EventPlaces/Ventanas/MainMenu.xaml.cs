@@ -1,4 +1,5 @@
 using EventPlaces.Event_Places;
+using EventPlaces.Pages;
 using Microsoft.Maui.Controls;
 
 namespace EventPlaces.Ventanas
@@ -47,7 +48,7 @@ namespace EventPlaces.Ventanas
                 await frame.ScaleTo(1, 50, Easing.CubicOut);
 
                 if (frame == PrincipalFrame)
-                    await Navigation.PushAsync(new ProfilePage());
+                    await Navigation.PushAsync(new PerfilUsuario());
                 else if (frame == FindPlaceFrame)
                     await Navigation.PushAsync(new NewPage1());
                 else if (frame == MyPaymentFrame)

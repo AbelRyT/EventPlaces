@@ -38,7 +38,6 @@ public partial class SeleccionFechasPage : ContentPage
         // Mostrar las fechas seleccionadas (o puedes usar este código para continuar el proceso de la reserva)
         await DisplayAlert("Fechas Confirmadas", $"Reserva del {StartDate:dd MMM yyyy} al {EndDate:dd MMM yyyy}", "OK");
 
-        // Aquí podrías redirigir a la siguiente pantalla para completar la reserva
-        // await Navigation.PushAsync(new ConfirmacionReservaPage());
+        await Navigation.PushAsync(new DescripcionReserva());
     }
 }

@@ -16,7 +16,7 @@
 
             <!-- Imagen y detalles de la reserva -->
             <Border StrokeShape="RoundRectangle 10">
-                <Image Source="imagen_reserva.jpg" Aspect="AspectFill" HeightRequest="200" />
+                <Image Source="imagen1.jpg" Aspect="AspectFill" HeightRequest="200" />
             </Border>
 
             <!-- Título de la reserva -->

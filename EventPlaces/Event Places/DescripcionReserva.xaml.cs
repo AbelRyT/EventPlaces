@@ -1,4 +1,6 @@
 
+using EventPlaces.Pages;
+
 namespace EventPlaces.Event_Places;
 
 public partial class DescripcionReserva : ContentPage
@@ -21,7 +23,7 @@ public partial class DescripcionReserva : ContentPage
         if (isConfirmed)
         {
             // Si el usuario confirma, procede a la siguiente página
-            await Navigation.PushAsync(new Reservados());
+            await Navigation.PushAsync(new PagoReserva());
         }
         else
         {

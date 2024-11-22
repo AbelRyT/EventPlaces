@@ -1,3 +1,6 @@
+using EventPlaces.Event_Places;
+using EventPlaces.Ventanas;
+
 namespace EventPlaces.Pages;
 
 public partial class CancelarReservaPage : ContentPage
@@ -14,12 +17,61 @@ public partial class CancelarReservaPage : ContentPage
         {
             // Lógica para cancelar la reserva
             await DisplayAlert("Éxito", "Tu reserva ha sido cancelada correctamente.", "OK");
-            await Navigation.PopToRootAsync(); // Vuelve a la pantalla principal
+            await Navigation.PushAsync(new MainMenu
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                ()); // Vuelve a la pantalla principal
         }
     }
 
     private async void OnVolverClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync(); // Vuelve a la pantalla anterior
+        await Navigation.PushAsync(new Reservados()); // Vuelve a la pantalla anterior
     }
 }
