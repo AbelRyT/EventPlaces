@@ -114,8 +114,8 @@
 	  <Compile Update="Event Places\hacerreservas.xaml.cs">
 	    <DependentUpon>hacerreservas.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Event Places\NewPage1.xaml.cs">
-	    <DependentUpon>NewPage1.xaml</DependentUpon>
+	  <Compile Update="Event Places\MenuPrincipal.xaml.cs">
+	    <DependentUpon>MenuPrincipal.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -132,7 +132,7 @@
 	  <MauiXaml Update="Event Places\hacerreservas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Event Places\NewPage1.xaml">
+	  <MauiXaml Update="Event Places\MenuPrincipal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Event Places\Reservados.xaml">
