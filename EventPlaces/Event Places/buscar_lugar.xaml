@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Event_Places.buscar_lugar"
+             Title="Buscar Lugares"
+             NavigationPage.HasNavigationBar="True">
+
+    <ContentPage.Background>
+        <!-- Fondo degradado -->
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#B5D0E2" Offset="0.0" />
+            <GradientStop Color="#E8D5D8" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid Padding="20" RowDefinitions="Auto, *" ColumnDefinitions="*">
+        <!-- Encabezado con esquinas redondeadas -->
+        <Frame Grid.Row="0"
+               BackgroundColor="#D9BFBF"
+               Padding="10"
+               CornerRadius="15"
+               HasShadow="True"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,20,0,30">
+            <Label Text="Buscar Lugares"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="Black" />
+        </Frame>
+
+        <!-- Contenedor principal -->
+        <VerticalStackLayout Grid.Row="1" Spacing="15">
+            <!-- Campo de destino -->
+            <Frame BackgroundColor="#F0F0F0"
+                   CornerRadius="25"
+                   Padding="10">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="📍" 
+                           FontSize="20" 
+                           VerticalOptions="Center" 
+                           TextColor="Gray" />
+                    <Entry Placeholder="Destino:"
+                           FontSize="16"
+                           TextColor="Black"
+                           PlaceholderColor="Gray"
+                           HorizontalOptions="FillAndExpand"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Campo de fechas -->
+            <!-- Fecha de llegada -->
+            <Frame BackgroundColor="#F0F0F0"
+                   CornerRadius="25"
+                   Padding="10">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="📅"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           TextColor="Gray" />
+                    <DatePicker x:Name="FechaLlegadaPicker"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="Black"
+                                Format="dd/MM/yyyy"
+                                HorizontalOptions="FillAndExpand"
+                                DateSelected="OnFechaLlegadaSeleccionada" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Fecha de salida -->
+            <Frame BackgroundColor="#F0F0F0"
+                   CornerRadius="25"
+                   Padding="10">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="📅"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           TextColor="Gray" />
+                    <DatePicker x:Name="FechaSalidaPicker"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="Black"
+                                Format="dd/MM/yyyy"
+                                HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Campo de huéspedes (como Frame, no editable) -->
+            <Frame BackgroundColor="#F0F0F0"
+                   CornerRadius="25"
+                   Padding="10"
+                   HasShadow="True">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="👤"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           TextColor="Gray" />
+                    <Label Text="Huéspedes: 2 Personas, 1 Habitacion"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Gesture Recognizer para capturar clics -->
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHuespedesButtonTapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Botón de buscar -->
+            <Button Text="Buscar"
+        FontSize="18"
+        BackgroundColor="#4A90E2"
+        TextColor="White"
+        CornerRadius="25"
+        HeightRequest="50"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="End"
+        Clicked="OnBuscarButtonClicked"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
