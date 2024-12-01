@@ -72,12 +72,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Event Places\buscar_lugar.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Event Places\cant_huespedes.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Event Places\DescripcionReserva.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

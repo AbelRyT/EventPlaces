@@ -8,18 +8,9 @@ namespace EventPlaces
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new buscar_lugar());
-
-            //MainPage = new DescripcionReserva();
-            //MainPage = new MisLugares();
-           // MainPage = new hacerreservas();
-           // MainPage = new Reservados();
-            //MainPage = new buscar_lugar();
-            //MainPage = new cant_huespedes();
-
-
-            MainPage = new NewPage1();
-            MainPage = new NavigationPage(new NewPage1());
+           MainPage = new hacerreservas();
+           //MainPage = new Reservados();
+           //MainPage = new NewPage1();
         }
     }
 }
