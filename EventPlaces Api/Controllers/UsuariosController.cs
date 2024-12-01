@@ -76,12 +76,9 @@ public class UsuariosController : ControllerBase
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "INSERT INTO usuarios (nombre, email, telefono, ImagenURL) VALUES (@nombre, @email, @telefono, @imagenurl)";
+            var sql = "INSERT INTO usuarios (email) VALUES (@email)";
             using var command = new NpgsqlCommand(sql, connection);
-            command.Parameters.AddWithValue("nombre", (string)usuario.nombre);
             command.Parameters.AddWithValue("email", (string)usuario.email);
-            command.Parameters.AddWithValue("telefono", (string)usuario.telefono);
-            command.Parameters.AddWithValue("imagenurl", (string)usuario.ImagenURL);
             command.ExecuteNonQuery();
         }
         return Ok("Usuario creado exitosamente.");

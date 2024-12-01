@@ -1,11 +1,15 @@
 using Firebase.Auth;
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace EventPlaces.Pages;
 
 public partial class Registrarse : ContentPage
 {
-	public Registrarse()
+    private readonly HttpClient _httpClient = new HttpClient();
+
+    public Registrarse()
 	{
 		InitializeComponent();
 	}
@@ -62,12 +66,35 @@ public partial class Registrarse : ContentPage
 
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
                 await authProvider.CreateUserWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
-                await DisplayAlert("Éxito", "Usuario registrado correctamente", "OK");
-                await Navigation.PushAsync(new LoginPage());
+
+                var user = new
+                {
+                    email = emailEntry.Text
+                };
+
+                var json = JsonSerializer.Serialize(user);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync("https://192.168.0.138:45456/api/Usuarios", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("Éxito", "Usuario registrado correctamente", "OK");
+                    await Navigation.PushAsync(new LoginPage());
+                }
+                else
+                {
+                    var errorResponse = await response.Content.ReadAsStringAsync();
+                    await DisplayAlert("Error", $"Error al registrar en la API: {errorResponse}", "OK");
+                }
+            }
+            catch (FirebaseAuthException ex)
+            {
+                await DisplayAlert("Error", $"Error en Firebase: {ex.Reason}", "OK");
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"No se pudo registrar: {ex.Message}", "OK");
+                await DisplayAlert("Error", $"Error inesperado: {ex.Message}", "OK");
             }
             finally
             {
