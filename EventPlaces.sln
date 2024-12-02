@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaces", "EventPlaces\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaces Api", "EventPlaces Api\EventPlaces Api.csproj", "{3B55EE04-B6A3-46CB-9972-A750EA8787E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{A9F604C9-EDA4-4124-BA25-93B3AE2C8A2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{3B55EE04-B6A3-46CB-9972-A750EA8787E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B55EE04-B6A3-46CB-9972-A750EA8787E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B55EE04-B6A3-46CB-9972-A750EA8787E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F604C9-EDA4-4124-BA25-93B3AE2C8A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F604C9-EDA4-4124-BA25-93B3AE2C8A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F604C9-EDA4-4124-BA25-93B3AE2C8A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F604C9-EDA4-4124-BA25-93B3AE2C8A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

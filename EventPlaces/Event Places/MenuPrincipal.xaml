@@ -49,8 +49,9 @@
 
         <!-- Lista de Reservaciones -->
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Reservations}"
-                        VerticalOptions="FillAndExpand">
+                ItemsSource="{Binding Lugares}"
+                VerticalOptions="FillAndExpand">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="0,10" HasShadow="True" CornerRadius="10">
@@ -60,43 +61,44 @@
                                 <GradientStop Color="#f5e5e9" Offset="1.0" />
                             </LinearGradientBrush>
                         </Frame.Background>
+
                         <Frame.GestureRecognizers>
-                            <!-- Este gesto detectará el clic en el elemento -->
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Tapped="OnFrameTapped" />
                         </Frame.GestureRecognizers>
 
                         <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="100, *">
-                            <!-- Imagen -->
+                            <!-- Imagen del lugar -->
                             <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
-                                   Source="{Binding ImageUrl}"
-                                   HeightRequest="100"
-                                   WidthRequest="100"
-                                   Aspect="AspectFill"
-                                   Margin="0, 0, 10, 0" />
-                            <!-- Título -->
-                            <Label Text="{Binding Title}" 
-                                   Grid.Column="1"
-                                   FontAttributes="Bold" 
-                                   FontSize="18" 
-                                   TextColor="#2980b9"/>
-                            <!-- Descripción -->
-                            <Label Text="{Binding Description}" 
-                                   Grid.Row="1" Grid.Column="1"
-                                   FontSize="14"
-                                   TextColor="Gray" 
-                                   LineBreakMode="WordWrap"/>
-                            <!-- Precio -->
-                            <Label Text="{Binding Price}" 
-                                   Grid.Row="2" Grid.Column="1"
-                                   FontAttributes="Bold" 
-                                   FontSize="16"
-                                   TextColor="#27ae60"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="End"/>
+                           Source="{Binding ImagenURL}"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           Aspect="AspectFill"
+                           Margin="0, 0, 10, 0" />
+                            <!-- Nombre del lugar -->
+                            <Label Text="{Binding Nombre}" 
+                           Grid.Column="1"
+                           FontAttributes="Bold" 
+                           FontSize="18" 
+                           TextColor="#2980b9"/>
+                            <!-- Descripción del lugar -->
+                            <Label Text="{Binding Descripcion}" 
+                           Grid.Row="1" Grid.Column="1"
+                           FontSize="14"
+                           TextColor="Gray" 
+                           LineBreakMode="WordWrap"/>
+                            <!-- Precio por día -->
+                            <Label Text="{Binding PrecioPorDia, StringFormat='Precio: {0:C}'}" 
+                           Grid.Row="2" Grid.Column="1"
+                           FontAttributes="Bold" 
+                           FontSize="16"
+                           TextColor="#27ae60"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
 </ContentPage>

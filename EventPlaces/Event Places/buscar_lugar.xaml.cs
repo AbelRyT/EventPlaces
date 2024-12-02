@@ -33,7 +33,7 @@ public partial class buscar_lugar : ContentPage
     private async void OnBuscarButtonClicked(object sender, EventArgs e)
     {
         // Navegar a la página NewPage1
-        await Navigation.PushAsync(new NewPage1());
+        await Navigation.PushAsync(new MenuPrincipal());
     }
 
 }

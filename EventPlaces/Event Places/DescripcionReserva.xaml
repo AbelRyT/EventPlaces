@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Event_Places.DescripcionReserva"
-             Title="Descripción de Reserva">
+             Title="Descripción de Reserva"
+             x:Name="DescripcionPage">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -13,66 +13,31 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="10" Padding="10">
-
-            <!-- Imagen principal dentro de un Border para redondear bordes -->
+            <!-- Imagen principal con binding -->
             <Border StrokeShape="RoundRectangle 10">
-                <Image Source="imagen1.jpg" Aspect="AspectFill" HeightRequest="200" />
+                <Image Source="{Binding ImagenURL}" Aspect="AspectFill" HeightRequest="200" />
             </Border>
 
             <!-- Título, precio y calificación -->
             <Grid ColumnDefinitions="*, Auto" Padding="0,10,0,0">
-                <Label Text="Emotions Puerto Plata" FontAttributes="Bold" FontSize="22" Grid.Column="0" TextColor="Black"/>
-                <Label Text="$9,500" TextColor="Green" FontAttributes="Bold" FontSize="20" Grid.Column="1"/>
+                <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="22" Grid.Column="0" TextColor="Black"/>
+                <Label Text="{Binding PrecioPorDia, StringFormat='Precio: {0:C}'}" TextColor="Green" FontAttributes="Bold" FontSize="20" Grid.Column="1"/>
             </Grid>
 
-            <!-- Calificación con estrellas -->
-            <HorizontalStackLayout Spacing="2">
-                <Label Text="★" TextColor="Gold" FontSize="16"/>
-                <Label Text="★" TextColor="Gold" FontSize="16"/>
-                <Label Text="★" TextColor="Gold" FontSize="16"/>
-                <Label Text="★" TextColor="Gold" FontSize="16"/>
-                <Label Text="★" TextColor="Gray" FontSize="16"/>
-            </HorizontalStackLayout>
+            <!-- Dirección -->
+            <Label Text="{Binding Direccion}" FontSize="16" TextColor="Gray"/>
+
+            <!-- Capacidad, Habitaciones y Baños -->
+            <Label Text="{Binding Capacidad, StringFormat='Capacidad: {0} personas'}" FontSize="16" TextColor="Black" Grid.Column="0"/>
+            <Label Text="{Binding Habitaciones, StringFormat='Habitaciones: {0}'}" FontSize="16" TextColor="Black" Grid.Column="1"/>
+            <Label Text="{Binding Banos, StringFormat='Baños: {0}'}" FontSize="16" TextColor="Black" Grid.Column="2"/>
+
 
             <!-- Descripción breve -->
-            <Label Text="Hotel junto a la playa con 3 albercas al aire libre" FontSize="14" TextColor="Black"/>
+            <Label Text="{Binding Descripcion}" FontSize="14" TextColor="Black"/>
 
-            <!-- Servicios principales -->
-            <Label Text="Servicios Principales" FontAttributes="Bold" FontSize="16" TextColor="Purple" Margin="0,10,0,0"/>
-
-            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto" ColumnSpacing="15" RowSpacing="10">
-                <!-- Servicios (íconos y nombres) -->
-                <Label Text="🛁 Alberca" Grid.Row="0" Grid.Column="0" FontSize="14" TextColor="Black"/>
-                <Label Text="🍽️ Restaurante" Grid.Row="0" Grid.Column="1" FontSize="14" TextColor="Black"/>
-                <Label Text="🧖 Tina de hidromasaje" Grid.Row="1" Grid.Column="0" FontSize="14" TextColor="Black"/>
-                <Label Text="🍸 Bar" Grid.Row="1" Grid.Column="1" FontSize="14" TextColor="Black"/>
-                <Label Text="💆 Spa" Grid.Row="2" Grid.Column="0" FontSize="14" TextColor="Black"/>
-                <Label Text="🛎️ Servicio a la habitación" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="Black"/>
-            </Grid>
-
-            <!-- Enlace para ver más servicios -->
-            <Label Text="Ver todos los servicios de esta propiedad >" FontSize="14" TextColor="Purple" TextDecorations="Underline"/>
-
-            <!-- Selección de Habitación -->
-            <Label Text="Seleccionar Habitación" FontAttributes="Bold" FontSize="16" Margin="0,20,0,0" TextColor="Black"/>
-
-            <VerticalStackLayout Spacing="10">
-                <!-- Bloque para Fechas -->
-                <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="0,5,0,0" >
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped" />
-                    </Frame.GestureRecognizers>
-                    <VerticalStackLayout>
-                        <Label Text="📅 Fechas" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
-                        <Label Text="1 Nov. - 5 Nov." FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
-
-            </VerticalStackLayout>
-
-            <!-- Botón para hacer la reserva -->
+            <!-- Botón de reserva -->
             <Button Text="Hacer Reserva" Clicked="Button_Clicked" BackgroundColor="Blue" TextColor="White" FontAttributes="Bold" FontSize="18" CornerRadius="10" HeightRequest="50" Margin="0,10,0,0"/>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,3 +1,5 @@
+using Common;
+using EventPlaces.Api;
 using Firebase.Auth;
 using System.Text;
 using System.Text.Json;
@@ -7,12 +9,19 @@ namespace EventPlaces.Pages;
 
 public partial class Registrarse : ContentPage
 {
+   
     private readonly HttpClient _httpClient = new HttpClient();
+
 
     public Registrarse()
 	{
 		InitializeComponent();
-	}
+        HttpClientHandler handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+        };
+        _httpClient = new HttpClient(handler);
+    }
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
@@ -67,15 +76,15 @@ public partial class Registrarse : ContentPage
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
                 await authProvider.CreateUserWithEmailAndPasswordAsync(emailEntry.Text, passwordEntry.Text);
 
-                var user = new
+                var user = new UsuarioDto
                 {
-                    email = emailEntry.Text
+                    Email = emailEntry.Text
                 };
 
                 var json = JsonSerializer.Serialize(user);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("https://192.168.0.138:45456/api/Usuarios", content);
+                var response = await _httpClient.PostAsync($"{Routes.Api}Usuarios/CreateUsuario", content);
 
                 if (response.IsSuccessStatusCode)
                 {

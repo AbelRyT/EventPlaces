@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class UsuariosController : ControllerBase
 {
@@ -15,7 +16,7 @@ public class UsuariosController : ControllerBase
     [HttpGet]
     public IActionResult GetUsuarios()
     {
-        var usuarios = new List<dynamic>();
+        var usuarios = new List<UsuarioDto>();
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
@@ -23,7 +24,7 @@ public class UsuariosController : ControllerBase
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                usuarios.Add(new
+                usuarios.Add(new UsuarioDto
                 {
                     Id = reader.GetInt32(0),
                     Nombre = reader.GetString(1),
@@ -46,46 +47,72 @@ public class UsuariosController : ControllerBase
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
-                using (var reader = command.ExecuteReader())
+                using var reader = command.ExecuteReader();
+                if (reader.Read())
                 {
-                    if (reader.Read())
+                    var usuario = new UsuarioDto
                     {
-                        var usuario = new
-                        {
-                            Id = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            Email = reader.GetString(2),
-                            Telefono = reader.GetString(3),
-                            ImagenURL = reader.GetString(4)
-                        };
-                        return Ok(usuario);
-                    }
-                    else
-                    {
-                        return NotFound("Usuario no encontrado.");
-                    }
+                        Id = reader.GetInt32(0),
+                        Nombre = reader.GetString(1),
+                        Email = reader.GetString(2),
+                        Telefono = reader.GetString(3),
+                        ImagenURL = reader.GetString(4)
+                    };
+                    return Ok(usuario);
+                }
+                else
+                {
+                    return NotFound("Usuario no encontrado.");
                 }
             }
         }
     }
 
-
     [HttpPost]
-    public IActionResult CreateUsuario([FromBody] dynamic usuario)
+    public IActionResult GetUsuarioByEmail([FromBody] UsuarioDto user)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "INSERT INTO usuarios (email) VALUES (@email)";
+            var sql = "SELECT * FROM usuarios WHERE email = @email";
+            using (var command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("email", user.Email.Trim());
+                using var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    var usuario = new UsuarioDto
+                    {
+                        Id = reader.GetInt32(0)
+                    };
+                    return Ok(usuario);
+                }
+                else
+                {
+                    return NotFound("Usuario no encontrado.");
+                }
+            }
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CreateUsuario([FromBody] UsuarioDto usuario)
+    {
+        using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+        {
+            connection.Open();
+            var sql = "INSERT INTO usuarios (nombre, email, telefono) VALUES (@nombre, @email, @telefono)";
             using var command = new NpgsqlCommand(sql, connection);
-            command.Parameters.AddWithValue("email", (string)usuario.email);
+            command.Parameters.AddWithValue("nombre", usuario.Nombre);
+            command.Parameters.AddWithValue("email", usuario.Email);
+            command.Parameters.AddWithValue("telefono", usuario.Telefono);
             command.ExecuteNonQuery();
         }
         return Ok("Usuario creado exitosamente.");
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateUsuario(int id, [FromBody] dynamic usuario)
+    public IActionResult UpdateUsuario(int id, [FromBody] UsuarioDto usuario)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
@@ -94,10 +121,10 @@ public class UsuariosController : ControllerBase
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
-                command.Parameters.AddWithValue("nombre", (string)usuario.nombre);
-                command.Parameters.AddWithValue("email", (string)usuario.email);
-                command.Parameters.AddWithValue("telefono", (string)usuario.telefono);
-                command.Parameters.AddWithValue("imagenurl", (string)usuario.ImagenURL);
+                command.Parameters.AddWithValue("nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("email", usuario.Email);
+                command.Parameters.AddWithValue("telefono", usuario.Telefono);
+                command.Parameters.AddWithValue("imagenurl", usuario.ImagenURL);
 
                 var rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
@@ -111,7 +138,4 @@ public class UsuariosController : ControllerBase
             }
         }
     }
-
 }
-
-

@@ -1,5 +1,9 @@
+using Common;
+using EventPlaces.Api;
 using EventPlaces.Event_Places;
 using Firebase.Auth;
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace EventPlaces.Pages;
@@ -8,12 +12,19 @@ public partial class LoginPage : ContentPage
 {
     private bool isLoginInProgress = false; // Bandera para evitar múltiples ejecuciones
     private bool isPasswordVisible = true; // Estado de visibilidad de la contraseña
+    private readonly HttpClient _httpClient = new HttpClient();
+
 
     public LoginPage()
     {
         InitializeComponent();
-        isPasswordVisible = true; 
-    passwordEntry.IsPassword = isPasswordVisible;
+        HttpClientHandler handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+        };
+        _httpClient = new HttpClient(handler);
+        isPasswordVisible = true;
+        passwordEntry.IsPassword = isPasswordVisible;
         UpdatePasswordVisibilityIcon(); // icono con que inicia la vista de la contraseña
     }
 
@@ -25,12 +36,12 @@ public partial class LoginPage : ContentPage
 
     private void OnEmailCompleted(object sender, EventArgs e)
     {
-        passwordEntry.Focus(); 
+        passwordEntry.Focus();
     }
 
     private void OnPasswordCompleted(object sender, EventArgs e)
     {
-        
+
         OnLoginClicked(sender, e);
     }
 
@@ -70,7 +81,7 @@ public partial class LoginPage : ContentPage
             passwordErrorLabel.IsVisible = false;
         }
 
-        
+
         if (isValid)
         {
             try
@@ -84,11 +95,37 @@ public partial class LoginPage : ContentPage
                 string token = auth.FirebaseToken;
                 if (!string.IsNullOrEmpty(token))
                 {
-                    // Limpia los campos de entrada después de un inicio de sesión exitoso
-                    emailEntry.Text = string.Empty;
-                    passwordEntry.Text = string.Empty;
+                    UsuarioDto userDto = new UsuarioDto
+                    {
+                        Email = emailEntry.Text
+                    };
 
-                    await Navigation.PushAsync(new MenuPrincipal());
+                    var jsonDTO = JsonSerializer.Serialize(userDto);
+                    var content = new StringContent(jsonDTO, Encoding.UTF8, "application/json");
+
+                    var response = await _httpClient.PostAsync($"{Routes.Api}Usuarios/GetUsuarioByEmail", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        var options = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        };
+                        var user = JsonSerializer.Deserialize<UsuarioDto>(json, options);
+                        Constante.usuarioId = user.Id;
+
+                        emailEntry.Text = string.Empty;
+                        passwordEntry.Text = string.Empty;
+
+                        await Navigation.PushAsync(new MenuPrincipal());
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", response.ReasonPhrase, "OK");
+                    }
+
+
                 }
                 else
                 {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.ReservacionPage"
+             Title="Reservar Lugar"
+             Padding="10">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#b5d0e2" Offset="0.0" />
+            <GradientStop Color="#e8d5d8" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15">
+            <!-- Detalle del lugar -->
+            <Frame Padding="10" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                <Grid ColumnDefinitions="100, *">
+                    <!-- Imagen del lugar -->
+                    <Image Source="{Binding Lugar.ImagenURL}" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
+                    <!-- Detalles del lugar -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="5" Padding="10,0">
+                        <Label Text="{Binding Lugar.Nombre}" FontAttributes="Bold" FontSize="22" TextColor="Black" />
+                        <Label Text="{Binding Lugar.Direccion}" FontSize="14" TextColor="Gray" />
+                        <Label Text="{Binding Lugar.PrecioPorDia, StringFormat='Precio por día: {0:C}'}" FontSize="16" TextColor="Green" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Selección de fechas -->
+            <Frame Padding="10" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout>
+                    <Label Text="Seleccionar Fechas" FontAttributes="Bold" FontSize="18" TextColor="Black" />
+                    <Grid ColumnDefinitions="*, *" Padding="0,10">
+                        <!-- Fecha de inicio -->
+                        <VerticalStackLayout Spacing="5" >
+                            <Label Text="Fecha Inicio" FontSize="14" TextColor="Gray" />
+                            <DatePicker Date="{Binding Reservacion.FechaInicio}" />
+                        </VerticalStackLayout>
+
+                        <!-- Fecha de fin -->
+                        <VerticalStackLayout Spacing="5" Grid.Column="1">
+                            <Label Text="Fecha Fin" FontSize="14" TextColor="Gray" />
+                            <DatePicker Date="{Binding Reservacion.FechaFin}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Botón para confirmar la reservación -->
+            <Button Text="Confirmar Reservación"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    CornerRadius="10"
+                    Clicked="OnConfirmarReservaClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

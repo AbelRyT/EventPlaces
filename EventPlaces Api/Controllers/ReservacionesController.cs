@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Data;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ReservacionesController : ControllerBase
 {
@@ -16,25 +17,28 @@ public class ReservacionesController : ControllerBase
     [HttpGet]
     public IActionResult GetReservaciones()
     {
-        var reservaciones = new List<dynamic>();
+        var reservaciones = new List<ReservacionDto>();
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "SELECT * FROM reservaciones";
+            var sql = @"SELECT r.id, r.usuario_id, r.lugar_id, r.fecha_inicio, r.fecha_fin, r.estado_id, e.nombre AS estado_nombre
+                    FROM reservaciones r
+                    JOIN estados e ON r.estado_id = e.id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        reservaciones.Add(new
+                        reservaciones.Add(new ReservacionDto
                         {
                             Id = reader.GetInt32(0),
-                            UsuarioId = reader.GetInt64(1),
-                            LugarId = reader.GetInt64(2),
+                            UsuarioId = reader.GetInt32(1),
+                            LugarId = reader.GetInt32(2),
                             FechaInicio = reader.GetDateTime(3),
                             FechaFin = reader.GetDateTime(4),
-                            EstadoId = reader.GetInt64(5)
+                            EstadoId = reader.GetInt32(5),
+                            EstadoNombre = reader.GetString(6) // Extraer el nombre del estado
                         });
                     }
                 }
@@ -43,13 +47,18 @@ public class ReservacionesController : ControllerBase
         return Ok(reservaciones);
     }
 
+
+
     [HttpGet("{id}")]
     public IActionResult GetReservacionById(int id)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "SELECT * FROM reservaciones WHERE id = @id";
+            var sql = @"SELECT r.id, r.usuario_id, r.lugar_id, r.fecha_inicio, r.fecha_fin, r.estado_id, e.nombre AS estado_nombre
+                    FROM reservaciones r
+                    JOIN estados e ON r.estado_id = e.id
+                    WHERE r.id = @id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
@@ -57,14 +66,15 @@ public class ReservacionesController : ControllerBase
                 {
                     if (reader.Read())
                     {
-                        var reservacion = new
+                        var reservacion = new ReservacionDto
                         {
                             Id = reader.GetInt32(0),
-                            UsuarioId = reader.GetInt64(1),
-                            LugarId = reader.GetInt64(2),
+                            UsuarioId = reader.GetInt32(1),
+                            LugarId = reader.GetInt32(2),
                             FechaInicio = reader.GetDateTime(3),
                             FechaFin = reader.GetDateTime(4),
-                            EstadoId = reader.GetInt64(5)
+                            EstadoId = reader.GetInt32(5),
+                            EstadoNombre = reader.GetString(6) // Extraer el nombre del estado
                         };
                         return Ok(reservacion);
                     }
@@ -78,43 +88,102 @@ public class ReservacionesController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateReservacion([FromBody] dynamic reservacion)
+    public IActionResult CreateReservacion([FromBody] ReservacionDto reservacion)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
+
+            // Validación para evitar solapamientos
+            var checkSql = @"
+            SELECT fecha_inicio, fecha_fin 
+            FROM reservaciones 
+            WHERE lugar_id = @lugar_id AND estado_id <> 3 
+                AND(fecha_inicio <= @fecha_fin AND fecha_fin >= @fecha_inicio)";
+    
+
+        using (var checkCommand = new NpgsqlCommand(checkSql, connection))
+            {
+                checkCommand.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
+                checkCommand.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
+                checkCommand.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
+
+                using (var reader = checkCommand.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        var fechaInicioExistente = reader.GetDateTime(0);
+                        var fechaFinExistente = reader.GetDateTime(1);
+                        return Conflict($"Ya existe una reservación del {fechaInicioExistente:dd/MM/yyyy} al {fechaFinExistente:dd/MM/yyyy}.");
+                    }
+                }
+            }
+
+            // Inserción si no hay conflictos
             var sql = @"INSERT INTO reservaciones (usuario_id, lugar_id, fecha_inicio, fecha_fin, estado_id) 
-                        VALUES (@usuario_id, @lugar_id, @fecha_inicio, @fecha_fin, @estado_id)";
+                    VALUES (@usuario_id, @lugar_id, @fecha_inicio, @fecha_fin, @estado_id)";
             using (var command = new NpgsqlCommand(sql, connection))
             {
-                command.Parameters.AddWithValue("usuario_id", (long)reservacion.usuario_id);
-                command.Parameters.AddWithValue("lugar_id", (long)reservacion.lugar_id);
-                command.Parameters.AddWithValue("fecha_inicio", (DateTime)reservacion.fecha_inicio);
-                command.Parameters.AddWithValue("fecha_fin", (DateTime)reservacion.fecha_fin);
-                command.Parameters.AddWithValue("estado_id", (long)reservacion.estado_id);
+                command.Parameters.AddWithValue("usuario_id", reservacion.UsuarioId);
+                command.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
+                command.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
+                command.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
+                command.Parameters.AddWithValue("estado_id", reservacion.EstadoId);
                 command.ExecuteNonQuery();
             }
         }
         return Ok("Reservación creada exitosamente.");
     }
 
+
+
     [HttpPut("{id}")]
-    public IActionResult UpdateReservacion(int id, [FromBody] dynamic reservacion)
+    public IActionResult UpdateReservacion(int id, [FromBody] ReservacionDto reservacion)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
+
+            // Validación de solapamiento, excluyendo la reservación que se está actualizando
+            var checkSql = @"
+            SELECT fecha_inicio, fecha_fin 
+            FROM reservaciones 
+            WHERE lugar_id = @lugar_id AND id <> @id AND estado_id <> 3
+            AND (fecha_inicio <= @fecha_fin AND fecha_fin >= @fecha_inicio)";
+
+            using (var checkCommand = new NpgsqlCommand(checkSql, connection))
+            {
+                checkCommand.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
+                checkCommand.Parameters.AddWithValue("id", id);
+                checkCommand.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
+                checkCommand.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
+
+                using (var reader = checkCommand.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        var fechaInicioExistente = reader.GetDateTime(0);
+                        var fechaFinExistente = reader.GetDateTime(1);
+                        return Conflict($"Ya existe una reservación del {fechaInicioExistente:dd/MM/yyyy} al {fechaFinExistente:dd/MM/yyyy}.");
+                    }
+                }
+            }
+
+            // Actualización si no hay conflictos
             var sql = @"UPDATE reservaciones 
-                        SET usuario_id = @usuario_id, lugar_id = @lugar_id, fecha_inicio = @fecha_inicio, fecha_fin = @fecha_fin, estado_id = @estado_id 
-                        WHERE id = @id";
+                    SET usuario_id = @usuario_id, lugar_id = @lugar_id, fecha_inicio = @fecha_inicio, fecha_fin = @fecha_fin, estado_id = @estado_id 
+                    WHERE id = @id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
-                command.Parameters.AddWithValue("usuario_id", (long)reservacion.usuario_id);
-                command.Parameters.AddWithValue("lugar_id", (long)reservacion.lugar_id);
-                command.Parameters.AddWithValue("fecha_inicio", (DateTime)reservacion.fecha_inicio);
-                command.Parameters.AddWithValue("fecha_fin", (DateTime)reservacion.fecha_fin);
-                command.Parameters.AddWithValue("estado_id", (long)reservacion.estado_id);
+                command.Parameters.AddWithValue("usuario_id", reservacion.UsuarioId);
+                command.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
+                command.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
+                command.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
+                command.Parameters.AddWithValue("estado_id", reservacion.EstadoId);
+
                 var rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
@@ -127,6 +196,7 @@ public class ReservacionesController : ControllerBase
             }
         }
     }
+
 
     [HttpDelete("{id}")]
     public IActionResult DeleteReservacion(int id)
@@ -150,4 +220,5 @@ public class ReservacionesController : ControllerBase
             }
         }
     }
+
 }
