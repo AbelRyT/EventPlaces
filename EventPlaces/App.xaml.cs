@@ -16,8 +16,6 @@ namespace EventPlaces
             //MainPage = new Reservados();
             // MainPage = new buscar_lugar();
             //MainPage = new cant_huespedes();
-
-
             MainPage = new NewPage1();
             MainPage = new NavigationPage(new NewPage1());
         }
