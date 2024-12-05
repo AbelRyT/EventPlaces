@@ -31,4 +31,32 @@ public partial class DescripcionReserva : ContentPage
             await DisplayAlert("Cancelado", "La reserva no se ha realizado.", "OK");
         }
     }
+
+    // Navegar a la página de Favoritos
+    private void OnFavoritesClicked(object sender, EventArgs e)
+    {
+        // Navegación a la página de favoritos (ejemplo)
+        //Navigation.PushAsync(new FavoritesPage());
+    }
+
+    // Navegar a la página principal
+    private void OnHomeClicked(object sender, EventArgs e)
+    {
+        // Navegación a la página principal (ejemplo)
+        Navigation.PushAsync(new MenuPrincipal());
+    }
+
+    // Navegar a la página de Mis Lugares
+    private void OnMyPlacesClicked(object sender, EventArgs e)
+    {
+        // Navegación a la página de Mis Lugares (ejemplo)
+        //Navigation.PushAsync(new MyPlacesPage());
+    }
+
+    // Navegar a la página de Configuración
+    private void OnSettingsClicked(object sender, EventArgs e)
+    {
+        // Navegación a la página de Configuración (ejemplo)
+        //Navigation.PushAsync(new SettingsPage());
+    }
 }

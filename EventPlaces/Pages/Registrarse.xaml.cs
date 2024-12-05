@@ -127,4 +127,16 @@ public partial class Registrarse : ContentPage
         var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, emailPattern);
     }
+
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        // Regresa a la página anterior (inicio de sesión)
+        await Navigation.PopAsync();
+    }
+
+    private async void OnLabelTapped(object sender, EventArgs e)
+    {
+        // Regresa a la página anterior (inicio de sesión)
+        await Navigation.PopAsync();
+    }
 }

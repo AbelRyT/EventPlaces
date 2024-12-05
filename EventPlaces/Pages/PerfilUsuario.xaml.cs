@@ -1,3 +1,5 @@
+using EventPlaces.Event_Places;
+
 namespace EventPlaces.Pages;
 
 public partial class PerfilUsuario : ContentPage
@@ -26,5 +28,11 @@ public partial class PerfilUsuario : ContentPage
             await DisplayAlert("Cerrar Sesión", "Has cerrado sesión exitosamente.", "OK");
             await Navigation.PopToRootAsync();
         }
+    }
+
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        // Regresa al menu
+        await Navigation.PushAsync(new MenuPrincipal());
     }
 }

@@ -73,6 +73,7 @@ public partial class LoginPage : ContentPage
         
         if (isValid)
         {
+            await Navigation.PushAsync(new PerfilUsuario());
             try
             {
                 // Mostrar el indicador de carga
@@ -88,7 +89,7 @@ public partial class LoginPage : ContentPage
                     emailEntry.Text = string.Empty;
                     passwordEntry.Text = string.Empty;
 
-                    await Navigation.PushAsync(new MenuPrincipal());
+                    //await Navigation.PushAsync(new MenuPrincipal());
                 }
                 else
                 {

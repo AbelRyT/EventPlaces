@@ -24,4 +24,10 @@ public partial class CambiarPassword : ContentPage
             await DisplayAlert("Error", "Ocurrió un error al cambiar la contraseña. Inténtalo de nuevo.", "OK");
         }
     }
+
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        // Regresa a la página anterior (inicio de sesión)
+        await Navigation.PopAsync();
+    }
 }

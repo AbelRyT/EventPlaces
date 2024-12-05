@@ -29,4 +29,10 @@ public partial class EditarPerfil : ContentPage
             await DisplayAlert("Error", "Ocurrió un error al guardar los cambios. Inténtalo de nuevo.", "OK");
         }
     }
+
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        // Regresa a la página anterior (inicio de sesión)
+        await Navigation.PopAsync();
+    }
 }

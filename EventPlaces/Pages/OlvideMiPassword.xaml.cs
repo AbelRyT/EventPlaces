@@ -8,6 +8,7 @@ public partial class OlvideMiPassword : ContentPage
     public OlvideMiPassword()
     {
         InitializeComponent();
+        
     }
 
 
@@ -43,6 +44,12 @@ public partial class OlvideMiPassword : ContentPage
     private async void OnLabelTapped(object sender, EventArgs e)
     {
         // Navegar de regreso a la página de inicio de sesión
+        await Navigation.PopAsync();
+    }
+
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        // Regresa a la página anterior (inicio de sesión)
         await Navigation.PopAsync();
     }
 }

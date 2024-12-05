@@ -3,8 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Pages.Registrarse"
              Title="Registrarse"
-             BackgroundColor="#F0F8FF">
-    <Grid Padding="20" RowDefinitions="Auto, *">
+             BackgroundColor="#F0F8FF"
+              Shell.NavBarIsVisible="False">
+    <!-- Contenedor principal -->
+    <VerticalStackLayout>
+        <!-- Barra personalizada -->
+        <Grid BackgroundColor="Transparent" HeightRequest="60" VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <!-- Botón de regreso -->
+                <ColumnDefinition Width="300" />
+                <!-- Título centrado -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Botón de regreso (más pequeño) -->
+            <ImageButton Source="arrow_back.png"  
+                     Grid.Column="0"
+                     BackgroundColor="Transparent"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     Margin="10"
+                     Clicked="OnBackButtonClicked" />
+
+            <!-- Título -->
+            <Label Text="REGISTRARSE"
+               Grid.Column="1"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               TextColor="black"
+               FontSize="20"
+               FontAttributes="Bold" />
+        </Grid>
+        <!-- Espaciado adicional -->
+        <BoxView HeightRequest="0" BackgroundColor="Transparent" />
+        
+        <Grid Padding="20" RowDefinitions="Auto, *">
         <Frame Grid.Row="0"
                CornerRadius="100"
                HeightRequest="200"
@@ -69,11 +104,17 @@
                                VerticalOptions="Center" />
 
             <!-- Link para regresar a la pantalla de Login -->
-            <Label Text="¿Ya tienes cuenta? Inicia sesión"
-                   FontAttributes="Italic"
-                   TextColor="Blue"
-                   HorizontalOptions="Center"
-                   FontSize="Small" />
-        </StackLayout>
+                <Label Text="¿Ya tienes cuenta? Inicia sesión"
+                    FontAttributes="Italic"
+                    TextColor="Blue"
+                    HorizontalOptions="Center"
+                    FontSize="Small" >
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLabelTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
     </Grid>
+    </VerticalStackLayout>
 </ContentPage>
