@@ -48,8 +48,16 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsRunning="False"
+                               IsVisible="False" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"
+                               Color="Blue"/>
+
             <!-- Botón para confirmar la reservación -->
-            <Button Text="Confirmar Reservación"
+            <Button x:Name="btnConfirmar"
+                    Text="Confirmar Reservación"
                     BackgroundColor="Blue"
                     TextColor="White"
                     FontAttributes="Bold"

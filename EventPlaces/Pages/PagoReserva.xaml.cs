@@ -1,5 +1,6 @@
 using Common;
 using EventPlaces.Api;
+using EventPlaces.Event_Places;
 using EventPlaces.Ventanas;
 using System.Text;
 using System.Text.Json;
@@ -26,6 +27,10 @@ public partial class PagoReserva : ContentPage
 
     private async void OnPagarAhoraClicked(object sender, EventArgs e)
     {
+       btnPagar.IsEnabled = false;
+        loadingIndicator.IsRunning = true;
+        loadingIndicator.IsVisible = true;
+
         bool confirm = await DisplayAlert("Confirmación de Pago", "¿Deseas proceder con el pago?", "Sí", "No");
         if (confirm)
         {
@@ -48,17 +53,27 @@ public partial class PagoReserva : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 await Shell.Current.Navigation.PushModalAsync(new VolantePagoPage(Reservacion));
+                btnPagar.IsEnabled = true;
+                loadingIndicator.IsRunning = false;
+                loadingIndicator.IsVisible = false;
+                await Navigation.PushAsync(new MenuPrincipal());
             }
             else
             {
                 var errorResponse = await response.Content.ReadAsStringAsync();
                 await DisplayAlert("Error", $"Error al registrar en la API: {errorResponse}", "OK");
+                btnPagar.IsEnabled = true;
+                loadingIndicator.IsRunning = false;
+                loadingIndicator.IsVisible = false;
             }
         }
         else
         {
             await DisplayAlert("Cancelado", "El pago ha sido cancelado.", "OK");
-            await Navigation.PushAsync(new PagoReserva(Reservacion));
+            btnPagar.IsEnabled = true;
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
+            await Navigation.PushAsync(new MenuPrincipal());
         }
     }
 }

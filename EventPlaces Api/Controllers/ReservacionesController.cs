@@ -122,9 +122,9 @@ public class ReservacionesController : ControllerBase
             FROM reservaciones 
             WHERE lugar_id = @lugar_id AND estado_id <> 3 
                 AND(fecha_inicio <= @fecha_fin AND fecha_fin >= @fecha_inicio)";
-    
 
-        using (var checkCommand = new NpgsqlCommand(checkSql, connection))
+
+            using (var checkCommand = new NpgsqlCommand(checkSql, connection))
             {
                 checkCommand.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
                 checkCommand.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
@@ -160,8 +160,8 @@ public class ReservacionesController : ControllerBase
 
 
 
-    [HttpPut("{id}")]
-    public IActionResult UpdateReservacion(int id, [FromBody] ReservacionDto reservacion)
+    [HttpPut]
+    public IActionResult UpdateReservacion([FromBody] ReservacionDto reservacion)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
@@ -177,7 +177,7 @@ public class ReservacionesController : ControllerBase
             using (var checkCommand = new NpgsqlCommand(checkSql, connection))
             {
                 checkCommand.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
-                checkCommand.Parameters.AddWithValue("id", id);
+                checkCommand.Parameters.AddWithValue("id", reservacion.Id);
                 checkCommand.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
                 checkCommand.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
 
@@ -199,9 +199,9 @@ public class ReservacionesController : ControllerBase
                     WHERE id = @id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
-                command.Parameters.AddWithValue("id", id);
+                command.Parameters.AddWithValue("id", reservacion.Id);
                 command.Parameters.AddWithValue("usuario_id", reservacion.UsuarioId);
-                command.Parameters.AddWithValue("lugar_id", reservacion.LugarId);
+                command.Parameters.AddWithValue("lugar_id", reservacion.Lugar.Id);
                 command.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
                 command.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
                 command.Parameters.AddWithValue("estado_id", reservacion.EstadoId);

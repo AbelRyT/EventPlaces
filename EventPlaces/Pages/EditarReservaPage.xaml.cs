@@ -1,32 +1,64 @@
+using Common;
+using EventPlaces.Api;
 using EventPlaces.Event_Places;
+using System.Text;
+using System.Text.Json;
 
 namespace EventPlaces.Pages;
 
 public partial class EditarReservaPage : ContentPage
 {
-	public EditarReservaPage()
+    private ReservacionDto ReservacionDto;
+    private readonly HttpClient _httpClient;
+	public EditarReservaPage(ReservacionDto reservacionDto)
 	{
 		InitializeComponent();
-	}
+        ReservacionDto = reservacionDto;
+        HttpClientHandler handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+        };
+        _httpClient = new HttpClient(handler);
+        BindingContext = ReservacionDto;
+    }
 
     private async void OnGuardarClicked(object sender, EventArgs e)
     {
+        btnGuardar.IsEnabled = false;
         // Validar las entradas
-        if (fechaInicioPicker.Date > fechaFinPicker.Date)
+        if (ReservacionDto.FechaInicio.Date > ReservacionDto.FechaFin.Date)
         {
             await DisplayAlert("Error", "La fecha de inicio no puede ser posterior a la fecha de fin", "OK");
+            btnGuardar.IsEnabled = true;
             return;
         }
 
-        if (string.IsNullOrEmpty(huespedesEntry.Text) || !int.TryParse(huespedesEntry.Text, out int numeroHuespedes) || numeroHuespedes <= 0)
+       
+        loadingIndicator.IsRunning = true;
+        loadingIndicator.IsVisible = true;
+
+        var json = JsonSerializer.Serialize(ReservacionDto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PutAsync($"{Routes.Api}Reservaciones/UpdateReservacion", content);
+
+        if (response.IsSuccessStatusCode)
         {
-            await DisplayAlert("Error", "Introduce un número válido de huéspedes", "OK");
-            return;
-        }
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
+            btnGuardar.IsEnabled = true;
 
-        // Guardar los cambios (implementa la lógica para actualizar la reserva)
-        await DisplayAlert("Éxito", "Reserva actualizada correctamente", "OK");
-        await Navigation.PushAsync(new Reservados());// Volver a la pantalla anterior
+            await Navigation.PushAsync(new Reservados());
+
+        }
+        else
+        {
+            var errorResponse = await response.Content.ReadAsStringAsync();
+            btnGuardar.IsEnabled = true;
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
+            await DisplayAlert("Error", $"Error: {errorResponse}", "OK");
+        }
     }
 
     private async void OnCancelarClicked(object sender, EventArgs e)

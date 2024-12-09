@@ -57,12 +57,26 @@ namespace EventPlaces.Event_Places
 
         private async void BtnEditar_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditarReservaPage());
+            var button = sender as Button;
+
+            var reservacion = button?.BindingContext as ReservacionDto; // Asegúrate de que 'Reservacion' sea el modelo de datos
+
+            if (reservacion != null)
+            {
+                await Navigation.PushAsync(new EditarReservaPage(reservacion));
+            }
         }
 
         private async void BtnCancelar_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PagoReserva(Reservaciones.First()));
+            var button = sender as Button;
+
+            var reservacion = button?.BindingContext as ReservacionDto; // Asegúrate de que 'Reservacion' sea el modelo de datos
+
+            if (reservacion != null)
+            {
+                await Navigation.PushAsync(new PagoReserva(reservacion));
+            }
         }
 
         private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

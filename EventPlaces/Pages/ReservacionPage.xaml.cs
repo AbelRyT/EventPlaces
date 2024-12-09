@@ -36,11 +36,16 @@ public partial class ReservacionPage : ContentPage
 
     private async void OnConfirmarReservaClicked(object sender, EventArgs e)
     {
+        btnConfirmar.IsEnabled = false;
         if (Reservacion.FechaInicio >= Reservacion.FechaFin)
         {
             await DisplayAlert("Error", "La fecha de fin debe ser posterior a la fecha de inicio.", "OK");
+            btnConfirmar.IsEnabled = true;
             return;
         }
+
+        loadingIndicator.IsRunning = true;
+        loadingIndicator.IsVisible = true;
 
         var json = JsonSerializer.Serialize(Reservacion);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -49,24 +54,22 @@ public partial class ReservacionPage : ContentPage
 
         if (response.IsSuccessStatusCode)
         {
-            bool isConfirmed = await DisplayAlert("Confirmación", "¿Desea pagar inmediatamente esta reservacion?", "Sí", "No");
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
+            btnConfirmar.IsEnabled = true;
 
-            if (isConfirmed)
-            {
-                // Si el usuario confirma, procede a la siguiente página
-                await Navigation.PushAsync(new PagoReserva(Reservacion));
-            }
-            else
-            {
-                await Navigation.PushAsync(new MenuPrincipal());
-            }
+            await Navigation.PushAsync(new Reservados());
+
         }
         else
         {
             var errorResponse = await response.Content.ReadAsStringAsync();
+            btnConfirmar.IsEnabled = true;
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
             await DisplayAlert("Error", $"Error al registrar en la API: {errorResponse}", "OK");
         }
 
-        
+
     }
 }

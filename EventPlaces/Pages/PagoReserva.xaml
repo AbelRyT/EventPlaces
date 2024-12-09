@@ -70,8 +70,16 @@
                        Grid.Column="1" />
             </Grid>
 
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsRunning="False"
+                               IsVisible="False" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"
+                               Color="Blue"/>
+
             <!-- Botón de pago -->
-            <Button Text="Pagar Ahora"
+            <Button x:Name="btnPagar"
+                    Text="Pagar Ahora"
                     BackgroundColor="#2E86C1"
                     TextColor="White"
                     FontAttributes="Bold"
