@@ -219,6 +219,38 @@ public class ReservacionesController : ControllerBase
         }
     }
 
+    [HttpPut]
+    public IActionResult CancelarReservacion([FromBody] ReservacionDto reservacion)
+    {
+        using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+        {
+            connection.Open();
+
+            // Actualización si no hay conflictos
+            var sql = @"UPDATE reservaciones 
+                    SET usuario_id = @usuario_id, lugar_id = @lugar_id, fecha_inicio = @fecha_inicio, fecha_fin = @fecha_fin, estado_id = @estado_id 
+                    WHERE id = @id";
+            using (var command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("id", reservacion.Id);
+                command.Parameters.AddWithValue("usuario_id", reservacion.UsuarioId);
+                command.Parameters.AddWithValue("lugar_id", reservacion.Lugar.Id);
+                command.Parameters.AddWithValue("fecha_inicio", reservacion.FechaInicio);
+                command.Parameters.AddWithValue("fecha_fin", reservacion.FechaFin);
+                command.Parameters.AddWithValue("estado_id", reservacion.EstadoId);
+
+                var rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    return Ok("Reservación actualizada exitosamente.");
+                }
+                else
+                {
+                    return NotFound("Reservación no encontrada.");
+                }
+            }
+        }
+    }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteReservacion(int id)

@@ -25,10 +25,6 @@
     <!--<ShellContent
             Title="Mis Pagos"
             ContentTemplate="{DataTemplate pages:PagosPage}"
-            Route="PagosPage" />
-        <ShellContent
-            Title="Mi Perfil"
-            ContentTemplate="{DataTemplate pages:UsuarioPage}"
-            Route="UsuarioPage" />-->
+            Route="PagosPage" />-->
 
 </Shell>

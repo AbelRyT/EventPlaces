@@ -2,6 +2,6 @@
 {
     internal static class Routes
     {
-        public static string Api = "https://192.168.100.104:45455/api/";
+        public static string Api = "https://10.20.20.73:45455/api/";
     }
 }

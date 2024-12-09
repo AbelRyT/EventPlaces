@@ -3,6 +3,7 @@ using EventPlaces.Api;
 using EventPlaces.Pages;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace EventPlaces.Event_Places
 {
@@ -37,6 +38,7 @@ namespace EventPlaces.Event_Places
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     var ReservacionesList = JsonConvert.DeserializeObject<List<ReservacionDto>>(json);
+                    ReservacionesList.OrderByDescending(x => x.Id);
 
                     Reservaciones.Clear();
                     foreach (var reservacion in ReservacionesList)

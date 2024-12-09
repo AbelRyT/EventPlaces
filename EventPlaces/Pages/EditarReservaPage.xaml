@@ -23,9 +23,6 @@
                 <Label Text="{Binding Lugar.Nombre}" FontAttributes="Bold" FontSize="22" Grid.Column="0" TextColor="Black"/>
             </Grid>
 
-            <!-- Descripción breve -->
-            <Label Text="Modifica la reserva" FontSize="14" TextColor="Black"/>
-
             <!-- Selección de fechas -->
             <Frame Padding="10" CornerRadius="10" HasShadow="True" BackgroundColor="White">
                 <VerticalStackLayout>
@@ -54,15 +51,15 @@
                                Color="Blue"/>
 
             <!-- Botones de acción -->
-            <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0">
                 <Button x:Name="btnGuardar"
-                        Text="Guardar Cambios"
+                        Text="Actualizar Reserva"
                         BackgroundColor="Green"
                         TextColor="White"
                         Clicked="OnGuardarClicked"
                         HorizontalOptions="FillAndExpand" />
                 <Button x:Name="btnCancelar"
-                        Text="Cancelar"
+                        Text="Cancelar Reserva"
                         BackgroundColor="Red"
                         TextColor="White"
                         Clicked="OnCancelarClicked"

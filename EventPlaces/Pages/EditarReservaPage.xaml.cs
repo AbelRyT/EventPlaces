@@ -25,11 +25,13 @@ public partial class EditarReservaPage : ContentPage
     private async void OnGuardarClicked(object sender, EventArgs e)
     {
         btnGuardar.IsEnabled = false;
+        btnCancelar.IsEnabled = false;
         // Validar las entradas
         if (ReservacionDto.FechaInicio.Date > ReservacionDto.FechaFin.Date)
         {
             await DisplayAlert("Error", "La fecha de inicio no puede ser posterior a la fecha de fin", "OK");
             btnGuardar.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
             return;
         }
 
@@ -47,6 +49,7 @@ public partial class EditarReservaPage : ContentPage
             loadingIndicator.IsRunning = false;
             loadingIndicator.IsVisible = false;
             btnGuardar.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
 
             await Navigation.PushAsync(new Reservados());
 
@@ -55,6 +58,7 @@ public partial class EditarReservaPage : ContentPage
         {
             var errorResponse = await response.Content.ReadAsStringAsync();
             btnGuardar.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
             loadingIndicator.IsRunning = false;
             loadingIndicator.IsVisible = false;
             await DisplayAlert("Error", $"Error: {errorResponse}", "OK");
@@ -64,10 +68,38 @@ public partial class EditarReservaPage : ContentPage
     private async void OnCancelarClicked(object sender, EventArgs e)
     {
         // Lógica para cancelar la edición
-        bool confirm = await DisplayAlert("Confirmación", "¿Estás seguro de que quieres cancelar los cambios?", "Sí", "No");
+        bool confirm = await DisplayAlert("Confirmación", "¿Estás seguro de que quieres cancelar la reserva?", "Sí", "No");
         if (confirm)
         {
-            await Navigation.PushAsync(new Reservados()); // Volver a la pantalla anterior
+            btnGuardar.IsEnabled = false;
+            btnCancelar.IsEnabled = false;
+            loadingIndicator.IsRunning = true;
+            loadingIndicator.IsVisible = true;
+            var cancelar = ReservacionDto;
+            cancelar.EstadoId = 3;
+            var json = JsonSerializer.Serialize(cancelar);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"{Routes.Api}Reservaciones/CancelarReservacion", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                loadingIndicator.IsRunning = false;
+                loadingIndicator.IsVisible = false;
+                btnGuardar.IsEnabled = true;
+                btnCancelar.IsEnabled = true;
+
+                await Navigation.PushAsync(new Reservados());
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                btnGuardar.IsEnabled = true;
+                btnCancelar.IsEnabled = true;
+                loadingIndicator.IsRunning = false;
+                loadingIndicator.IsVisible = false;
+                await DisplayAlert("Error", $"Error: {errorResponse}", "OK");
+            }
         }
     }
 }
