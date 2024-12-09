@@ -5,12 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:EventPlaces"
     xmlns:pages="clr-namespace:EventPlaces.Pages"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:eventPlaces="clr-namespace:EventPlaces.Event_Places"
+    Shell.FlyoutBehavior="Flyout"
     Title="EventPlaces">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate pages:LoginPage}"
         Route="MainPage" />
+
+    <ShellContent
+            Title="Inicio"
+            ContentTemplate="{DataTemplate eventPlaces:MenuPrincipal}"
+            Route="MainPage" />
+    <ShellContent
+            Title="Mis Reservaciones"
+            ContentTemplate="{DataTemplate eventPlaces:Reservados}"
+            Route="Reservados" />
+    <!--<ShellContent
+            Title="Mis Pagos"
+            ContentTemplate="{DataTemplate pages:PagosPage}"
+            Route="PagosPage" />
+        <ShellContent
+            Title="Mi Perfil"
+            ContentTemplate="{DataTemplate pages:UsuarioPage}"
+            Route="UsuarioPage" />-->
 
 </Shell>

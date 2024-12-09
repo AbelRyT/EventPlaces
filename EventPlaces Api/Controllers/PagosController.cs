@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Data;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class PagosController : ControllerBase
 {
@@ -17,22 +18,21 @@ public class PagosController : ControllerBase
     [HttpGet]
     public IActionResult GetPagos()
     {
-        var pagos = new List<dynamic>();
+        var pagos = new List<PagoDto>();
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "SELECT * FROM pagos";
+            var sql = "SELECT id, reservacion_id, monto, fecha_pago, metodo_pago, estado FROM pagos";
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        pagos.Add(new
+                        pagos.Add(new PagoDto
                         {
                             Id = reader.GetInt32(0),
-                            UsuarioId = reader.GetInt64(1),
-                            ReservacionId = reader.GetInt64(2),
+                            ReservacionId = reader.GetInt32(2),
                             Monto = reader.GetDecimal(3),
                             FechaPago = reader.GetDateTime(4),
                             MetodoPago = reader.GetString(5),
@@ -52,7 +52,7 @@ public class PagosController : ControllerBase
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "SELECT * FROM pagos WHERE id = @id";
+            var sql = "SELECT id, usuario_id, reservacion_id, monto, fecha_pago, metodo_pago, estado FROM pagos WHERE id = @id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
@@ -60,11 +60,10 @@ public class PagosController : ControllerBase
                 {
                     if (reader.Read())
                     {
-                        var pago = new
+                        var pago = new PagoDto
                         {
                             Id = reader.GetInt32(0),
-                            UsuarioId = reader.GetInt64(1),
-                            ReservacionId = reader.GetInt64(2),
+                            ReservacionId = reader.GetInt32(2),
                             Monto = reader.GetDecimal(3),
                             FechaPago = reader.GetDateTime(4),
                             MetodoPago = reader.GetString(5),
@@ -83,30 +82,59 @@ public class PagosController : ControllerBase
 
     // POST: api/Pagos
     [HttpPost]
-    public IActionResult CreatePago([FromBody] dynamic pago)
+    public IActionResult CreatePago([FromBody] PagoDto pago)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = @"INSERT INTO pagos (usuario_id, reservacion_id, monto, fecha_pago, metodo_pago, estado) 
-                        VALUES (@usuario_id, @reservacion_id, @monto, @fecha_pago, @metodo_pago, @estado)";
-            using (var command = new NpgsqlCommand(sql, connection))
+            using (var transaction = connection.BeginTransaction()) // Iniciar una transacción
             {
-                command.Parameters.AddWithValue("usuario_id", (long)pago.usuario_id);
-                command.Parameters.AddWithValue("reservacion_id", (long)pago.reservacion_id);
-                command.Parameters.AddWithValue("monto", (decimal)pago.monto);
-                command.Parameters.AddWithValue("fecha_pago", (DateTime)pago.fecha_pago);
-                command.Parameters.AddWithValue("metodo_pago", (string)pago.metodo_pago);
-                command.Parameters.AddWithValue("estado", (string)pago.estado);
-                command.ExecuteNonQuery();
+                try
+                {
+                    // 1. Insertar el pago
+                    var sqlPago = @"INSERT INTO pagos ( reservacion_id, monto, fecha_pago, metodo_pago, estado_id) 
+                            VALUES ( @reservacion_id, @monto, @fecha_pago, @metodo_pago, @estado_id)";
+                    using (var commandPago = new NpgsqlCommand(sqlPago, connection))
+                    {
+                        commandPago.Parameters.AddWithValue("reservacion_id", pago.ReservacionId);
+                        commandPago.Parameters.AddWithValue("monto", pago.Monto);
+                        commandPago.Parameters.AddWithValue("fecha_pago", pago.FechaPago);
+                        commandPago.Parameters.AddWithValue("metodo_pago", 2);
+                        commandPago.Parameters.AddWithValue("estado_id",2);
+                        commandPago.ExecuteNonQuery();
+                    }
+
+                    // 2. Actualizar el estado de la reservación a 2 (por ejemplo, pagado)
+                    var sqlActualizarReservacion = @"UPDATE reservaciones 
+                                             SET estado_id = @estado_id 
+                                             WHERE id = @reservacion_id";
+                    using (var commandActualizar = new NpgsqlCommand(sqlActualizarReservacion, connection))
+                    {
+                        commandActualizar.Parameters.AddWithValue("estado_id", 2); // Nuevo estado
+                        commandActualizar.Parameters.AddWithValue("reservacion_id", pago.ReservacionId);
+                        commandActualizar.ExecuteNonQuery();
+                    }
+
+                    // Confirmar transacción
+                    transaction.Commit();
+                    return Ok("Pago registrado exitosamente.");
+                }
+                catch (Exception ex)
+                {
+                    // Revertir en caso de error
+                    transaction.Rollback();
+                    return BadRequest(ex.Message);
+                    throw new Exception();
+                }
             }
         }
-        return Ok("Pago registrado exitosamente.");
+
+       
     }
 
     // PUT: api/Pagos/{id}
     [HttpPut("{id}")]
-    public IActionResult UpdatePago(int id, [FromBody] dynamic pago)
+    public IActionResult UpdatePago(int id, [FromBody] PagoDto pago)
     {
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
@@ -118,12 +146,12 @@ public class PagosController : ControllerBase
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("id", id);
-                command.Parameters.AddWithValue("usuario_id", (long)pago.usuario_id);
-                command.Parameters.AddWithValue("reservacion_id", (long)pago.reservacion_id);
-                command.Parameters.AddWithValue("monto", (decimal)pago.monto);
-                command.Parameters.AddWithValue("fecha_pago", (DateTime)pago.fecha_pago);
-                command.Parameters.AddWithValue("metodo_pago", (string)pago.metodo_pago);
-                command.Parameters.AddWithValue("estado", (string)pago.estado);
+                command.Parameters.AddWithValue("usuario_id", pago.UsuarioId);
+                command.Parameters.AddWithValue("reservacion_id", pago.ReservacionId);
+                command.Parameters.AddWithValue("monto", pago.Monto);
+                command.Parameters.AddWithValue("fecha_pago", pago.FechaPago);
+                command.Parameters.AddWithValue("metodo_pago", pago.MetodoPago);
+                command.Parameters.AddWithValue("estado", pago.Estado);
 
                 var rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)

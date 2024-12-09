@@ -1,69 +1,58 @@
+using Common;
+using EventPlaces.Api;
 using EventPlaces.Pages;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
 namespace EventPlaces.Event_Places
 {
     public partial class Reservados : ContentPage
     {
-        public ObservableCollection<Reservacion> Reservaciones { get; set; }
+        public ObservableCollection<ReservacionDto> Reservaciones { get; set; } = new ObservableCollection<ReservacionDto>();
+
+        private readonly HttpClient _httpClient;
 
         public Reservados()
         {
             InitializeComponent();
 
-            // Lista de reservaciones de ejemplo
-            Reservaciones = new ObservableCollection<Reservacion>
+            HttpClientHandler handler = new HttpClientHandler
             {
-                new Reservacion
-                {
-                    Titulo = "Emotions Puerto Plata",
-                    Fecha = "23 de octubre del 2024",
-                    Hora = "10:30 AM",
-                    Estado = "Pendiente",
-                    ImagenUrl = "/images/imagen1.jpg"
-                },
-                new Reservacion
-                {
-                    Titulo = "Residencial Majestuoso Thomen",
-                    Fecha = "23 de octubre del 2024",
-                    Hora = "10:30 AM",
-                    Estado = "Confirmada",
-                    ImagenUrl = "/images/imagen2.jpg"
-                },
-                new Reservacion
-                {
-                    Titulo = "Torre de lujo entrada a Santiago",
-                    Fecha = "23 de octubre del 2024",
-                    Hora = "10:30 AM",
-                    Estado = "Pendiente",
-                    ImagenUrl = "/images/imagen3.jpg"
-                },
-                new Reservacion
-                {
-                    Titulo = "Residencial en Gurabo",
-                    Fecha = "23 de octubre del 2024",
-                    Hora = "10:30 AM",
-                    Estado = "Confirmada",
-                    ImagenUrl = "/images/imagen4.jpg"
-                },
-                new Reservacion
-                {
-                    Titulo = "Villa Laura Jarabacoa",
-                    Fecha = "23 de octubre del 2024",
-                    Hora = "10:30 AM",
-                    Estado = "Pendiente",
-                    ImagenUrl = "/images/imagen5.jpg"
-                }
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
             };
+            _httpClient = new HttpClient(handler);
 
-            // Establecer el contexto de enlace de datos
             BindingContext = this;
+            _ = LoadReservacionesAsync();
         }
 
-        private async void OnLabelTapped(object sender, EventArgs e)
+        private async Task LoadReservacionesAsync()
         {
-            // Navegar a la nueva página
-            await Navigation.PushAsync(new hacerreservas());
+            try
+            {
+                string apiUrl = $"{Routes.Api}Reservaciones/GetReservaciones";
+                HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    var ReservacionesList = JsonConvert.DeserializeObject<List<ReservacionDto>>(json);
+
+                    Reservaciones.Clear();
+                    foreach (var reservacion in ReservacionesList)
+                    {
+                        Reservaciones.Add(reservacion);
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No se pudo cargar la lista de Reservaciones.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
+            }
         }
 
         private async void BtnEditar_Clicked(object sender, EventArgs e)
@@ -73,17 +62,13 @@ namespace EventPlaces.Event_Places
 
         private async void BtnCancelar_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CancelarReservaPage());
+            await Navigation.PushAsync(new PagoReserva(Reservaciones.First()));
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        {
+
         }
     }
 
-    // Modelo de datos para la reservación
-    public class Reservacion
-    {
-        public string Titulo { get; set; }
-        public string Fecha { get; set; }
-        public string Hora { get; set; }
-        public string Estado { get; set; }
-        public string ImagenUrl { get; set; }
-    }
 }

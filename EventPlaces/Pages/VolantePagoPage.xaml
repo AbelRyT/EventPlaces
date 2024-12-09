@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Pages.VolantePagoPage"
+             BackgroundColor="#FFFFFF"
+             Padding="20">
+    <VerticalStackLayout Spacing="20">
+
+        <!-- Título del volante -->
+        <Label Text="Volante de Pago"
+               FontAttributes="Bold"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="#2E86C1" />
+
+        <!-- Detalles del pago -->
+        <Frame BackgroundColor="#F9F9F9" CornerRadius="10" Padding="15">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Gracias por tu pago"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="Black" />
+                <Label Text="{Binding Lugar.Nombre}"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding FechaFormatted}"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding PrecioTotal, StringFormat=Precio Dia: {0:N2}}"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="Green" />
+                <Label Text="Método de Pago: Tarjeta de Crédito"
+                       FontSize="16"
+                       TextColor="Black" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Botón para cerrar -->
+        <Button Text="Cerrar"
+                BackgroundColor="#2E86C1"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnCerrarClicked" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -21,9 +21,17 @@ public class ReservacionesController : ControllerBase
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = @"SELECT r.id, r.usuario_id, r.lugar_id, r.fecha_inicio, r.fecha_fin, r.estado_id, e.nombre AS estado_nombre
-                    FROM reservaciones r
-                    JOIN estados e ON r.estado_id = e.id";
+            var sql = @"
+                        SELECT 
+                            r.id, r.usuario_id, r.fecha_inicio, r.fecha_fin, 
+                            r.estado_id, e.nombre AS estado_nombre,
+                            l.id AS lugar_id, l.nombre AS lugar_nombre, l.direccion, 
+                            l.capacidad, l.descripcion, l.precioxdia, 
+                            l.imagenURL, l.favorito, l.habitaciones, l.banos
+                        FROM reservaciones r
+                        JOIN estado e ON r.estado_id = e.id
+                        JOIN lugares l ON r.lugar_id = l.id";
+
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 using (var reader = command.ExecuteReader())
@@ -34,14 +42,28 @@ public class ReservacionesController : ControllerBase
                         {
                             Id = reader.GetInt32(0),
                             UsuarioId = reader.GetInt32(1),
-                            LugarId = reader.GetInt32(2),
-                            FechaInicio = reader.GetDateTime(3),
-                            FechaFin = reader.GetDateTime(4),
-                            EstadoId = reader.GetInt32(5),
-                            EstadoNombre = reader.GetString(6) // Extraer el nombre del estado
+                            FechaInicio = reader.GetDateTime(2),
+                            FechaFin = reader.GetDateTime(3),
+                            EstadoId = reader.GetInt32(4),
+                            EstadoNombre = reader.GetString(5),
+
+                            Lugar = new LugarDto
+                            {
+                                Id = reader.GetInt32(6),
+                                Nombre = reader.GetString(7),
+                                Direccion = reader.GetString(8),
+                                Capacidad = reader.GetInt32(9),
+                                Descripcion = reader.GetString(10),
+                                PrecioPorDia = reader.GetDecimal(11),
+                                ImagenURL = reader.GetString(12),
+                                Favorito = reader.GetBoolean(13),
+                                Habitaciones = reader.GetInt32(14),
+                                Banos = reader.GetInt32(15)
+                            }
                         });
                     }
                 }
+
             }
         }
         return Ok(reservaciones);
@@ -57,7 +79,7 @@ public class ReservacionesController : ControllerBase
             connection.Open();
             var sql = @"SELECT r.id, r.usuario_id, r.lugar_id, r.fecha_inicio, r.fecha_fin, r.estado_id, e.nombre AS estado_nombre
                     FROM reservaciones r
-                    JOIN estados e ON r.estado_id = e.id
+                    JOIN estado e ON r.estado_id = e.id
                     WHERE r.id = @id";
             using (var command = new NpgsqlCommand(sql, connection))
             {
@@ -70,7 +92,7 @@ public class ReservacionesController : ControllerBase
                         {
                             Id = reader.GetInt32(0),
                             UsuarioId = reader.GetInt32(1),
-                            LugarId = reader.GetInt32(2),
+                            //LugarId = reader.GetInt32(2),
                             FechaInicio = reader.GetDateTime(3),
                             FechaFin = reader.GetDateTime(4),
                             EstadoId = reader.GetInt32(5),

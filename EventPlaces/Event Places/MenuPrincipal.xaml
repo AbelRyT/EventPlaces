@@ -40,10 +40,7 @@
                            HorizontalOptions="Center"
                            TextColor="Black" />
                 </Grid>
-                <!-- Detector de clics -->
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnSearchButtonTapped" />
-                </Frame.GestureRecognizers>
+
             </Frame>
         </Grid>
 

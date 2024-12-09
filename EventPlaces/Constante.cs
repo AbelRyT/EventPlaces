@@ -2,6 +2,6 @@
 {
     public static class Constante
     {
-        public static int usuarioId;
+        public static int usuarioId = 2;
     }
 }

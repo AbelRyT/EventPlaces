@@ -54,7 +54,7 @@ public partial class ReservacionPage : ContentPage
             if (isConfirmed)
             {
                 // Si el usuario confirma, procede a la siguiente página
-                await Navigation.PushAsync(new PagoReserva());
+                await Navigation.PushAsync(new PagoReserva(Reservacion));
             }
             else
             {

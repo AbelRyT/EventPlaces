@@ -17,17 +17,17 @@
             <!-- Información de la reserva -->
             <Frame BackgroundColor="White" CornerRadius="10" Padding="15" Margin="0,0,0,15">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Emotions Puerto Plata"
+                    <Label Text="{Binding Lugar.Nombre}"
                            FontAttributes="Bold"
                            FontSize="22"
                            TextColor="Black" />
-                    <Label Text="Del 1 Nov. al 5 Nov."
+                    <Label Text="{Binding FechaFormatted}"
                            FontSize="16"
                            TextColor="Gray" />
-                    <Label Text="2 Personas, 1 Habitación"
+                    <Label Text="{Binding Lugar.PrecioPorDia, StringFormat=Precio Dia: {0}}"
                            FontSize="14"
                            TextColor="Black" />
-                    <Label Text="Precio Total: $9,500"
+                    <Label Text="{Binding PrecioTotal, StringFormat=Precio Total: {0}}"
                            FontAttributes="Bold"
                            FontSize="18"
                            TextColor="Green" />
@@ -45,22 +45,28 @@
                    Keyboard="Numeric"
                    MaxLength="16"
                    BackgroundColor="#f0f0f0"
-                   />
+                   TextColor="Black" />
+            <Label Text="* Ingrese un número válido" 
+                   TextColor="Red" 
+                   IsVisible="False" 
+                   x:Name="ErrorTarjeta" />
 
             <Entry Placeholder="Nombre en la tarjeta"
                    BackgroundColor="#f0f0f0"
-                   />
+                   TextColor="Black" />
 
             <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                 <Entry Placeholder="MM/AA"
                        Keyboard="Numeric"
                        BackgroundColor="#f0f0f0"
+                       TextColor="Black"
                        Grid.Column="0" />
 
                 <Entry Placeholder="CVV"
                        Keyboard="Numeric"
                        MaxLength="3"
                        BackgroundColor="#f0f0f0"
+                       TextColor="Black"
                        Grid.Column="1" />
             </Grid>
 
