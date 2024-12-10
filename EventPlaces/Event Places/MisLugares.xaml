@@ -11,10 +11,30 @@
     </ContentPage.Background>
 
     <StackLayout Padding="10">
+        <Frame x:Name="NotificationBar"
+               IsVisible="False"
+               BackgroundColor="#E53935"
+               CornerRadius="10"
+               Padding="10"
+               Opacity="0"
+               Margin="0,10,0,10"
+               Grid.Row="0">
+            <Label Text="¡Eliminado de Favoritos!"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="15"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+        </Frame>
 
         <!-- Título con Icono -->
-        <Frame BackgroundColor="#D2C9C9" CornerRadius="15" Padding="10" Margin="0,0,0,10">
+        <Frame BackgroundColor="#85CA92" CornerRadius="15" Padding="10" Margin="0,0,0,10">
+            
             <Grid ColumnDefinitions="Auto, *" VerticalOptions="Center">
+
+                <!-- Barra de notificación -->
+
+                
                 <!-- Icono -->
                 <Label Text="&#xe539;"  
                        FontFamily="MaterialIcons" 
@@ -26,14 +46,18 @@
                        Rotation="50"/>
 
                 <!-- Título -->
-                <Label Text="Mis Lugares" FontAttributes="Bold" FontSize="18" TextColor="Black" 
+                <Label Text="Favoritos" FontAttributes="Bold" FontSize="18" TextColor="Black" 
                        VerticalOptions="Center" HorizontalOptions="Center" Margin="117,0,0,0"/>
             </Grid>
+            
+            
         </Frame>
 
         <!-- Lista de Lugares -->
         <CollectionView ItemsSource="{Binding Lugares}" SelectionMode="None" VerticalOptions="FillAndExpand">
+            
             <CollectionView.ItemTemplate>
+                
                 <DataTemplate>
                     <Frame Padding="8" Margin="0,8" HasShadow="True" CornerRadius="10">
                         <Frame.Background>
@@ -71,12 +95,45 @@
                                     </Label.FormattedText>
                                 </Label>
                             </StackLayout>
+                            
 
-                            <!-- Botón Editar estilizado y ajustado -->
+                            <!-- Botón Editar estilizado y ajustado 
                             <Button Text="Editar" FontSize="13" BackgroundColor="#27ae60" TextColor="White" 
                                     CornerRadius="20" Padding="16,2" WidthRequest="100"
                                     HorizontalOptions="EndAndExpand" VerticalOptions="End" 
-                                    Margin="0,0,15,0" Grid.Row="2" Grid.Column="1" />
+                                    Margin="0,0,15,0" Grid.Row="2" Grid.Column="1" />-->
+
+
+
+                            <!-- Ícono del Corazón -->
+                            <Frame BackgroundColor="#E53935"
+       Grid.Column="2"
+       Grid.Row="0"
+       CornerRadius="15"
+       HeightRequest="30"
+       WidthRequest="30"
+       HorizontalOptions="End"
+       VerticalOptions="Start"
+       Padding="0"
+       Margin="5">
+                                <Label Text="&#xE5CD;" 
+                                    FontSize="20"
+           VerticalOptions="Center"
+           HorizontalOptions="Center"
+           TextColor="White"
+           FontFamily="MaterialIcons" >
+
+
+                                    <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnHeartTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                
+                            </Frame>
+
+
+
+
                         </Grid>
                     </Frame>
                 </DataTemplate>

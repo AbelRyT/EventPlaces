@@ -80,7 +80,7 @@
 
                                     <!-- Niños -->
                                     <Grid ColumnDefinitions="*, Auto, Auto, Auto" Padding="10">
-                                        <Label Text="Niños\n(0 a 17 años)"
+                                        <Label Text="Niños (0 a 17 años)"
                                                FontSize="16"
                                                TextColor="Black"
                                                VerticalOptions="Center"

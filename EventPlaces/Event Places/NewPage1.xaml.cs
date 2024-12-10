@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -6,14 +6,14 @@ namespace EventPlaces.Event_Places
 {
     public partial class NewPage1 : ContentPage
     {
-        // ColecciÛn de reservaciones
+        // Colecci√≥n de reservaciones
         public ObservableCollection<Reservation> Reservations { get; set; }
 
         public NewPage1()
         {
             InitializeComponent();
 
-            // Inicializamos la colecciÛn de reservaciones
+            // Inicializamos la colecci√≥n de reservaciones
             Reservations = new ObservableCollection<Reservation>
             {
                 new Reservation
@@ -21,13 +21,13 @@ namespace EventPlaces.Event_Places
                     Title = "Emotions Puerto Plata",
                     Description = "Playa Dorada\nPiscina\nSpa\nBar",
                     Price = "9,500",
-                    ImageUrl = "images/imagen1.jpg", // Cambia a la ruta v·lida
+                    ImageUrl = "images/imagen1.jpg", // Cambia a la ruta v√°lida
                     NavigateCommand = new Command(() => NavigateToDetails("Emotions Puerto Plata"))
                 },
                 new Reservation
                 {
                     Title = "Residencial Majestuoso Thomen",
-                    Description = "Hasta 3 habitaciones\nSeguridad 24 Horas\n¡rea social y terraza",
+                    Description = "Hasta 3 habitaciones\nSeguridad 24 Horas\n√Årea social y terraza",
                     Price = "15,000",
                     ImageUrl = "images/imagen2.jpg",
                     NavigateCommand = new Command(() => NavigateToDetails("Residencial Majestuoso Thomen"))
@@ -35,7 +35,7 @@ namespace EventPlaces.Event_Places
                 new Reservation
                 {
                     Title = "Torre de lujo entrada a Santiago",
-                    Description = "Desde 5 habitaciones\n2 BaÒos\n1 Parqueos",
+                    Description = "Desde 5 habitaciones\n2 Ba√±os\n1 Parqueos",
                     Price = "17,500",
                     ImageUrl = "images/imagen3.jpg",
                     NavigateCommand = new Command(() => NavigateToDetails("Torre de lujo entrada a Santiago"))
@@ -43,7 +43,7 @@ namespace EventPlaces.Event_Places
                 new Reservation
                 {
                     Title = "Residencial en Gurabo",
-                    Description = "2 Habitaciones\n1 BaÒo\nHasta 2 Parqueos",
+                    Description = "2 Habitaciones\n1 Ba√±o\nHasta 2 Parqueos",
                     Price = "22,500",
                     ImageUrl = "images/imagen4.jpg",
                     NavigateCommand = new Command(() => NavigateToDetails("Residencial en Gurabo"))
@@ -51,30 +51,56 @@ namespace EventPlaces.Event_Places
                 new Reservation
                 {
                     Title = "Villa Laura Jarabacoa",
-                    Description = "3 Habitaciones\nPiscina al aire libre\nParqueo gratis incluido\nCuenta con balcÛn",
+                    Description = "3 Habitaciones\nPiscina al aire libre\nParqueo gratis incluido\nCuenta con balc√≥n",
                     Price = "10,400",
                     ImageUrl = "images/imagen5.jpg",
                     NavigateCommand = new Command(() => NavigateToDetails("Villa Laura Jarabacoa"))
                 }
             };
 
-            // Establecemos el contexto de datos para la p·gina
+            // Establecemos el contexto de datos para la p√°gina
             BindingContext = this;
         }
 
-        // MÈtodo para manejar la navegaciÛn
+        // M√©todo para manejar la navegaci√≥n
         private async void NavigateToDetails(string reservationTitle)
         {
-            // AquÌ puedes navegar a una nueva p·gina
+            // Aqu√≠ puedes navegar a una nueva p√°gina
            // await DisplayAlert("Reserva seleccionada", $"Navegando a {reservationTitle}", "OK");
-            await Navigation.PushAsync(new DescripcionReserva()); // Cambia "MisLugares" por tu p·gina de destino
+            await Navigation.PushAsync(new DescripcionReserva()); // Cambia "MisLugares" por tu p√°gina de destino
         }
 
-        // MÈtodo para manejar el botÛn de b˙squeda
+        private async void ShowNotification()
+        {
+            // Mostrar la barra de notificaci√≥n
+            NotificationBar.IsVisible = true;
+
+            // Animaci√≥n de aparici√≥n
+            await NotificationBar.FadeTo(1, 250); // Duraci√≥n: 250ms
+
+            // Esperar 3 segundos
+            await Task.Delay(3000);
+
+            // Animaci√≥n de desaparici√≥n
+            await NotificationBar.FadeTo(0, 250); // Duraci√≥n: 250ms
+
+            // Ocultar la barra
+            NotificationBar.IsVisible = false;
+        }
+
+        private void OnHeartTapped(object sender, EventArgs e)
+        {
+            // Mostrar notificaci√≥n
+            ShowNotification();
+        }
+
+
+
+        // M√©todo para manejar el bot√≥n de b√∫squeda
         private async void OnSearchButtonTapped(object sender, EventArgs e)
         {
-            // await DisplayAlert("Buscar", "FunciÛn de b˙squeda a˙n no implementada", "OK");
-            await Navigation.PushAsync(new buscar_lugar()); // Cambia "MisLugares" por tu p·gina de destino
+            // await DisplayAlert("Buscar", "Funci√≥n de b√∫squeda a√∫n no implementada", "OK");
+            await Navigation.PushAsync(new buscar_lugar()); // Cambia "MisLugares" por tu p√°gina de destino
 
         }
     }
@@ -86,6 +112,6 @@ namespace EventPlaces.Event_Places
         public string Description { get; set; }
         public string Price { get; set; }
         public string ImageUrl { get; set; }
-        public ICommand NavigateCommand { get; set; } // Comando para manejar la navegaciÛn
+        public ICommand NavigateCommand { get; set; } // Comando para manejar la navegaci√≥n
     }
 }

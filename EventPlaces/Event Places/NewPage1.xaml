@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Event_Places.NewPage1"
@@ -12,9 +11,26 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <Grid Padding="10" RowDefinitions="Auto, *">
+    <Grid Padding="10" RowDefinitions="Auto, Auto, *">
+        <!-- Barra de notificación -->
+        <Frame x:Name="NotificationBar"
+               IsVisible="False"
+               BackgroundColor="#E53935"
+               CornerRadius="10"
+               Padding="10"
+               Opacity="0"
+               Margin="0,10,0,10"
+               Grid.Row="0">
+            <Label Text="¡Agregado a Favoritos!"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+        </Frame>
+
         <!-- Botones de búsqueda -->
-        <Grid Padding="10" ColumnDefinitions="3*,0*" RowDefinitions="Auto" Grid.Row="0">
+        <Grid Padding="10" ColumnDefinitions="3*,0*" RowDefinitions="Auto" Grid.Row="1">
             <!-- Botón Buscar -->
             <Frame BackgroundColor="#F0F0F0"
                    CornerRadius="25"
@@ -48,7 +64,7 @@
         </Grid>
 
         <!-- Lista de Reservaciones -->
-        <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Reservations}"
                         VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
@@ -65,7 +81,7 @@
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{Binding .}" />
                         </Frame.GestureRecognizers>
 
-                        <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="100, *">
+                        <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="100, *, Auto">
                             <!-- Imagen -->
                             <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
                                    Source="{Binding ImageUrl}"
@@ -93,6 +109,28 @@
                                    TextColor="#27ae60"
                                    HorizontalOptions="End"
                                    VerticalOptions="End"/>
+
+                            <!-- Ícono del Corazón -->
+                            <Frame BackgroundColor="#E53935"
+                                   Grid.Column="2"
+                                   Grid.Row="0"
+                                   CornerRadius="15"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   Padding="0"
+                                   Margin="5">
+                                <Label Text="🤍"
+                                       FontSize="16"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       TextColor="White">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnHeartTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Frame>
                         </Grid>
                     </Frame>
                 </DataTemplate>

@@ -40,16 +40,16 @@
                             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="100, *" ColumnSpacing="15" HorizontalOptions="FillAndExpand">
 
                                 <!-- Imagen de la reservación con esquinas ovaladas -->
-                                <Frame Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" CornerRadius="18" Padding="0" HasShadow="False" BackgroundColor="Transparent" BorderColor="Transparent">
+                                <Frame Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" CornerRadius="8" Padding="0" HasShadow="False" BackgroundColor="Transparent" BorderColor="Transparent">
                                     <!-- Ajuste de la imagen para respetar el CornerRadius -->
                                     <Image Source="{Binding ImagenUrl}" 
                                            Aspect="AspectFill" 
-                                           HeightRequest="110"
-                                           WidthRequest="110"
+                                           HeightRequest="130"
+                                           WidthRequest="130"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center">
                                         <Image.Clip>
-                                            <RoundRectangleGeometry CornerRadius="35" Rect="0,0,110,110"/>
+                                            <RoundRectangleGeometry CornerRadius="3" Rect="0,0,110,110"/>
                                         </Image.Clip>
                                     </Image>
                                 </Frame>

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace EventPlaces.Event_Places
 {
@@ -42,33 +44,44 @@ namespace EventPlaces.Event_Places
                     Ubicacion = "Santiago \n",
                     Price = "17,500",
                     ImageUrl = "/images/imagen3.jpg"
-                },
-                new MiLugares
-                {
-                    Title = "Residencial en Gurabo",
-                    Habitaciones = "2 \n",
-                    Banos = "1 \n",
-                    Parqueos = "2 \n",
-                    Ubicacion = "Gurabo \n",
-                    Price = "22,500",
-                    ImageUrl = "/images/imagen4.jpg"
-                },
-                new MiLugares
-                {
-                    Title = "Villa Laura Jarabacoa",
-                    Habitaciones = "4 \n",
-                    Banos = "2 \n",
-                    Parqueos = "3 \n",
-                    Ubicacion = "Jarabacoa \n",
-                    Price = "10,400",
-                    ImageUrl = "/images/imagen5.jpg"
                 }
+              
             };
 
             // Establecemos el contexto de datos para la página
             BindingContext = this;
         }
+
+
+        private async void ShowNotification()
+        {
+            // Mostrar la barra de notificación
+            NotificationBar.IsVisible = true;
+
+            // Animación de aparición
+            await NotificationBar.FadeTo(1, 250); // Duración: 250ms
+
+            // Esperar 3 segundos
+            await Task.Delay(3000);
+
+            // Animación de desaparición
+            await NotificationBar.FadeTo(0, 250); // Duración: 250ms
+
+            // Ocultar la barra
+            NotificationBar.IsVisible = false;
+        }
+
+        private void OnHeartTapped(object sender, EventArgs e)
+        {
+            // Mostrar notificación
+            ShowNotification();
+        }
+
+
     }
+
+
+
 
     // Definimos la clase MiLugares
     public class MiLugares

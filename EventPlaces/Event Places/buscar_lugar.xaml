@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Event_Places.buscar_lugar"
-             Title="Buscar Lugares"
+             Title="Buscar Lugares" 
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Background>
@@ -14,29 +14,46 @@
     </ContentPage.Background>
 
     <Grid Padding="20" RowDefinitions="Auto, *" ColumnDefinitions="*">
+        <!-- Ícono de Material Icons -->
+        <Label Text="←"
+       HorizontalOptions="Start"
+       VerticalOptions="Start"
+       FontSize="30"
+       TextColor="Black"
+       Margin="5,0,0,0"
+       Grid.Row="0"
+       Grid.Column="0">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnBackButtonTapped" />
+            </Label.GestureRecognizers>
+        </Label>
+
+
+
         <!-- Encabezado con esquinas redondeadas -->
         <Frame Grid.Row="0"
-               BackgroundColor="#D9BFBF"
-               Padding="10"
-               CornerRadius="15"
-               HasShadow="True"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"
-               Margin="0,20,0,30">
+       BackgroundColor="#D9BFBF"
+       Padding="10"
+       CornerRadius="8"
+       HasShadow="True"
+       HorizontalOptions="FillAndExpand"
+       VerticalOptions="Start"
+       HeightRequest="50" 
+            Margin="10,50,10,50">
+            <!-- Ajusta el margen para que sea uniforme -->
             <Label Text="Buscar Lugares"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   TextColor="Black" />
+           FontSize="16" 
+                FontAttributes="Bold"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           TextColor="Black" />
         </Frame>
+
 
         <!-- Contenedor principal -->
         <VerticalStackLayout Grid.Row="1" Spacing="15">
             <!-- Campo de destino -->
-            <Frame BackgroundColor="#F0F0F0"
-                   CornerRadius="25"
-                   Padding="10">
+            <Frame BackgroundColor="#E0E0E0"  CornerRadius="10"  Padding="10">
                 <HorizontalStackLayout Spacing="10">
                     <Label Text="📍" 
                            FontSize="20" 
@@ -51,66 +68,30 @@
             </Frame>
 
             <!-- Campo de fechas -->
-            <!-- Fecha de llegada -->
-            <Frame BackgroundColor="#F0F0F0"
-                   CornerRadius="25"
-                   Padding="10">
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="📅"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="Gray" />
-                    <DatePicker x:Name="FechaLlegadaPicker"
-                                FontSize="16"
-                                FontAttributes="Bold"
-                                TextColor="Black"
-                                Format="dd/MM/yyyy"
-                                HorizontalOptions="FillAndExpand"
-                                DateSelected="OnFechaLlegadaSeleccionada" />
-                </HorizontalStackLayout>
-            </Frame>
-
-            <!-- Fecha de salida -->
-            <Frame BackgroundColor="#F0F0F0"
-                   CornerRadius="25"
-                   Padding="10">
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="📅"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="Gray" />
-                    <DatePicker x:Name="FechaSalidaPicker"
-                                FontSize="16"
-                                FontAttributes="Bold"
-                                TextColor="Black"
-                                Format="dd/MM/yyyy"
-                                HorizontalOptions="FillAndExpand" />
-                </HorizontalStackLayout>
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="📅 Fechas" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
+                    <Label x:Name="FechaLabel" Text="Seleccione la fecha de la reservacion" FontSize="14" TextColor="Black"/>
+                </VerticalStackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFechaButtonClicked" />
+                </Frame.GestureRecognizers>
             </Frame>
 
             <!-- Campo de huéspedes (como Frame, no editable) -->
-            <Frame BackgroundColor="#F0F0F0"
-                   CornerRadius="25"
-                   Padding="10"
-                   HasShadow="True">
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="👤"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="Gray" />
-                    <Label Text="Huéspedes: 2 Personas, 1 Habitacion"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="Black"
-                           VerticalOptions="Center"
-                           HorizontalOptions="FillAndExpand" />
-                </HorizontalStackLayout>
-
-                <!-- Gesture Recognizer para capturar clics -->
+            <Frame BackgroundColor="#E0E0E0" CornerRadius="10" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="👤 Huespedes" FontAttributes="Bold" FontSize="14" TextColor="Purple"/>
+                    <Label x:Name="HuespedesLabel" Text="Seleccione la cantidad de huespedes" FontSize="14" TextColor="Black" />
+                </VerticalStackLayout>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnHuespedesButtonTapped" />
+                    <TapGestureRecognizer Tapped="OnHuespedesClicked" />
                 </Frame.GestureRecognizers>
             </Frame>
+
+
+   
+
 
             <!-- Botón de buscar -->
             <Button Text="Buscar"
