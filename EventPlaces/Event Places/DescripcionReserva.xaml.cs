@@ -314,6 +314,32 @@ public partial class DescripcionReserva : ContentPage
         await Navigation.PushModalAsync(modalPage);
     }
 
+
+    private async void ShowNotification()
+    {
+        // Mostrar la barra de notificación
+        NotificationBar.IsVisible = true;
+
+        // Animación de aparición
+        await NotificationBar.FadeTo(1, 250); // Duración: 250ms
+
+        // Esperar 3 segundos
+        await Task.Delay(3000);
+
+        // Animación de desaparición
+        await NotificationBar.FadeTo(0, 250); // Duración: 250ms
+
+        // Ocultar la barra
+        NotificationBar.IsVisible = false;
+    }
+
+    private void OnConfirmarReservaClicked(object sender, EventArgs e)
+    {
+        // Mostrar notificación
+        ShowNotification();
+    }
+
+
     // Clase auxiliar para manejar las habitaciones
     public class Habitacion
     {

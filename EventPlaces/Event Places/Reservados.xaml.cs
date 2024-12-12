@@ -58,7 +58,48 @@ namespace EventPlaces.Event_Places
             // Establecer el contexto de enlace de datos
             BindingContext = this;
         }
+
+        private async void OnEditarClicked(object sender, EventArgs e)
+        {
+            // Obtiene el contexto del elemento actual para pasarlo a la página de detalles
+            var button = sender as Button;
+            var reservacion = button?.BindingContext as Reservacion;
+
+            if (reservacion != null)
+            {
+                // Navega a la página DescripcionReservas con el objeto reservacion
+                await Navigation.PushAsync(new DescripcionReserva());
+            }
+        }
+
+
+        private async void ShowNotification()
+        {
+            // Mostrar la barra de notificación
+            NotificationBar.IsVisible = true;
+
+            // Animación de aparición
+            await NotificationBar.FadeTo(1, 250); // Duración: 250ms
+
+            // Esperar 3 segundos
+            await Task.Delay(3000);
+
+            // Animación de desaparición
+            await NotificationBar.FadeTo(0, 250); // Duración: 250ms
+
+            // Ocultar la barra
+            NotificationBar.IsVisible = false;
+        }
+
+        private void OnCancelarClicked(object sender, EventArgs e)
+        {
+            // Mostrar notificación
+            ShowNotification();
+        }
+
     }
+
+
 
     // Modelo de datos para la reservación
     public class Reservacion
