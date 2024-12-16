@@ -9,10 +9,6 @@
     Shell.FlyoutBehavior="Flyout"
     Title="EventPlaces">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:LoginPage}"
-        Route="MainPage" />
 
     <ShellContent
             Title="Inicio"

@@ -10,6 +10,24 @@ namespace EventPlaces.Event_Places
     public partial class MenuPrincipal : ContentPage
     {
         public ObservableCollection<LugarDto> Lugares { get; set; } = new ObservableCollection<LugarDto>();
+        public ObservableCollection<LugarDto> FilteredLugares { get; set; } = new ObservableCollection<LugarDto>();
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterLugares(); // Filtra automáticamente cuando cambia el texto de búsqueda
+                }
+            }
+        }
+
+        public ICommand SearchCommand { get; }
 
         private readonly HttpClient _httpClient;
 
@@ -24,6 +42,9 @@ namespace EventPlaces.Event_Places
             _httpClient = new HttpClient(handler);
 
             BindingContext = this;
+
+            SearchCommand = new Command(FilterLugares);
+
             _ = LoadLugaresAsync();
         }
 
@@ -31,7 +52,7 @@ namespace EventPlaces.Event_Places
         {
             try
             {
-                string apiUrl = $"{Routes.Api}Lugares/GetLugares"; 
+                string apiUrl = $"{Routes.Api}Lugares/GetLugares";
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
                 if (response.IsSuccessStatusCode)
@@ -40,9 +61,12 @@ namespace EventPlaces.Event_Places
                     var lugaresList = JsonConvert.DeserializeObject<List<LugarDto>>(json);
 
                     Lugares.Clear();
+                    FilteredLugares.Clear();
+
                     foreach (var lugar in lugaresList)
                     {
                         Lugares.Add(lugar);
+                        FilteredLugares.Add(lugar); // Inicia la lista filtrada con todos los lugares
                     }
                 }
                 else
@@ -53,6 +77,29 @@ namespace EventPlaces.Event_Places
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
+            }
+        }
+
+        private void FilterLugares()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                FilteredLugares.Clear();
+                foreach (var lugar in Lugares)
+                {
+                    FilteredLugares.Add(lugar);
+                }
+            }
+            else
+            {
+                var lowerSearchText = SearchText.ToLowerInvariant();
+                var filtered = Lugares.Where(l => l.Nombre.ToLowerInvariant().Contains(lowerSearchText)
+                                                  || l.Descripcion.ToLowerInvariant().Contains(lowerSearchText));
+                FilteredLugares.Clear();
+                foreach (var lugar in filtered)
+                {
+                    FilteredLugares.Add(lugar);
+                }
             }
         }
 

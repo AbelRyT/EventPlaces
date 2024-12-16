@@ -118,7 +118,7 @@ public partial class LoginPage : ContentPage
                         emailEntry.Text = string.Empty;
                         passwordEntry.Text = string.Empty;
 
-                        await Navigation.PushAsync(new MenuPrincipal());
+                        Application.Current.MainPage = new AppShell();
                     }
                     else
                     {

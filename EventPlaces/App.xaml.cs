@@ -1,5 +1,6 @@
 ﻿
 using EventPlaces.Event_Places;
+using EventPlaces.Pages;
 
 namespace EventPlaces
 {
@@ -8,9 +9,16 @@ namespace EventPlaces
         public App()
         {
             InitializeComponent();
-           MainPage = new AppShell();
-           //MainPage = new Reservados();
-           //MainPage = new NewPage1();
+            bool isAuthenticated = false;
+
+            if (isAuthenticated)
+            {
+                MainPage = new AppShell(); // Mostrar menú si está autenticado
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage()); // Mostrar Login si no lo está
+            }
         }
     }
 }

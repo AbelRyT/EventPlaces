@@ -12,43 +12,47 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <Grid Padding="10" RowDefinitions="Auto, *">
+    <Grid Padding="10" RowDefinitions="Auto, Auto, *">
+        <!-- SearchBar para búsqueda -->
+        <SearchBar Placeholder="Buscar lugar..."
+               Text="{Binding SearchText}"
+               SearchCommand="{Binding SearchCommand}"
+               Grid.Row="0" />
+
         <!-- Botones de búsqueda -->
-        <Grid Padding="10" ColumnDefinitions="3*,0*" RowDefinitions="Auto" Grid.Row="0">
+        <Grid Padding="10" ColumnDefinitions="3*,0*" RowDefinitions="Auto" Grid.Row="1">
             <!-- Botón Buscar -->
             <Frame BackgroundColor="#F0F0F0"
-                   CornerRadius="25"
-                   Padding="0"
-                   BorderColor="Black"
-                   HasShadow="True"
-                   Grid.Column="0">
+               CornerRadius="25"
+               Padding="0"
+               BorderColor="Black"
+               HasShadow="True"
+               Grid.Column="0">
                 <Grid Padding="10"
-                      HorizontalOptions="FillAndExpand"
-                      VerticalOptions="Center"
-                      ColumnDefinitions="Auto, *">
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"
+                  ColumnDefinitions="Auto, *">
                     <!-- Ícono de búsqueda (Material Icons) -->
                     <Label Text="&#xe8b6;"
-                           FontFamily="MaterialIcons"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Start"
-                           TextColor="Black" />
+                       FontFamily="MaterialIcons"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       TextColor="Black" />
                     <!-- Texto "Buscar" centrado -->
                     <Label Text="                                Buscar"
-                           FontSize="16"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           TextColor="Black" />
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       TextColor="Black" />
                 </Grid>
-
             </Frame>
         </Grid>
 
         <!-- Lista de Reservaciones -->
-        <CollectionView Grid.Row="1"
-                ItemsSource="{Binding Lugares}"
-                VerticalOptions="FillAndExpand">
-            
+        <CollectionView Grid.Row="2"
+            ItemsSource="{Binding FilteredLugares}"
+            VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="0,10" HasShadow="True" CornerRadius="10">
@@ -66,36 +70,35 @@
                         <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="100, *">
                             <!-- Imagen del lugar -->
                             <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
-                           Source="{Binding ImagenURL}"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Aspect="AspectFill"
-                           Margin="0, 0, 10, 0" />
+                       Source="{Binding ImagenURL}"
+                       HeightRequest="100"
+                       WidthRequest="100"
+                       Aspect="AspectFill"
+                       Margin="0, 0, 10, 0" />
                             <!-- Nombre del lugar -->
                             <Label Text="{Binding Nombre}" 
-                           Grid.Column="1"
-                           FontAttributes="Bold" 
-                           FontSize="18" 
-                           TextColor="#2980b9"/>
+                       Grid.Column="1"
+                       FontAttributes="Bold" 
+                       FontSize="18" 
+                       TextColor="#2980b9"/>
                             <!-- Descripción del lugar -->
                             <Label Text="{Binding Descripcion}" 
-                           Grid.Row="1" Grid.Column="1"
-                           FontSize="14"
-                           TextColor="Gray" 
-                           LineBreakMode="WordWrap"/>
+                       Grid.Row="1" Grid.Column="1"
+                       FontSize="14"
+                       TextColor="Gray" 
+                       LineBreakMode="WordWrap"/>
                             <!-- Precio por día -->
                             <Label Text="{Binding PrecioPorDia, StringFormat='Precio: {0:C}'}" 
-                           Grid.Row="2" Grid.Column="1"
-                           FontAttributes="Bold" 
-                           FontSize="16"
-                           TextColor="#27ae60"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"/>
+                       Grid.Row="2" Grid.Column="1"
+                       FontAttributes="Bold" 
+                       FontSize="16"
+                       TextColor="#27ae60"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
     </Grid>
 </ContentPage>

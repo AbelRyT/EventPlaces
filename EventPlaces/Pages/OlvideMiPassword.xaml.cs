@@ -38,7 +38,7 @@ public partial class OlvideMiPassword : ContentPage
             await authProvider.SendPasswordResetEmailAsync(email);
 
             await DisplayAlert("Éxito", "Se ha enviado un enlace de restablecimiento de contraseña a tu correo.", "OK");
-            await Navigation.PopAsync(); 
+            await Navigation.PushAsync(new LoginPage()); 
         }
         catch (Exception ex)
         {
