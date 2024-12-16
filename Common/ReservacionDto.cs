@@ -10,7 +10,6 @@
         public int EstadoId { get; set; }
         public string EstadoNombre { get; set; } = string.Empty;
 
-        // Objeto Lugar
         public LugarDto Lugar { get; set; } = new LugarDto();
 
         public decimal PrecioTotal => Lugar.PrecioPorDia * ((FechaFin - FechaInicio).Days);

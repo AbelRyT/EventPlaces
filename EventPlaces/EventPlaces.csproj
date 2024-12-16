@@ -82,6 +82,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Event Places\Pagados.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\CambiarPassword.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

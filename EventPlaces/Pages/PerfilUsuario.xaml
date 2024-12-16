@@ -2,59 +2,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Pages.PerfilUsuario"
- Title="Perfil">
+             Title="Perfil de Usuario">
 
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#d7e7f3" Offset="0.0" />
-            <GradientStop Color="#f5d0c5" Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
 
-    <ScrollView HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <VerticalStackLayout Spacing="20" Padding="20"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <!-- Imagen de perfil -->
-            <Frame BackgroundColor="White" CornerRadius="75" HeightRequest="150" WidthRequest="150" HasShadow="True">
-                <Image Source="profile_placeholder.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" />
-            </Frame>
+                <!-- Imagen de perfil -->
+                <Image x:Name="profileImage"
+                       Source="default_profile.png"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       Aspect="AspectFill"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Image.Clip>
+                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                    </Image.Clip>
+                </Image>
 
-            <!-- Información del usuario -->
-            <Label Text="Nombre del Usuario"
-               FontAttributes="Bold"
-               FontSize="24"
-               TextColor="Black"
-               HorizontalOptions="Center" />
+                <!-- Correo (no editable) -->
+                <Entry x:Name="emailEntry"
+                       Placeholder="Correo Electrónico"
+                       IsReadOnly="True"
+                       Text="{Binding Email}"
+                       FontSize="18"
+                       TextColor="Gray"
+                       Keyboard="Email" />
 
-            <Label Text="correo@ejemplo.com"
-               FontSize="16"
-               TextColor="Gray"
-               HorizontalOptions="Center" />
+                <!-- Nombre -->
+                <Entry x:Name="nameEntry"
+                       Placeholder="Nombre"
+                       Text="{Binding Nombre}"
+                       FontSize="18"
+                       TextColor="Black"
+                       Keyboard="Text" />
 
-            <!-- Botones de acciones -->
-            <Button Text="Editar Perfil"
-                BackgroundColor="#4CAF50"
-                TextColor="White"
-                FontAttributes="Bold"
-                CornerRadius="10"
-                HeightRequest="50"
-                Clicked="OnEditarPerfilClicked" />
+                <!-- Teléfono -->
+                <Entry x:Name="phoneEntry"
+                       Placeholder="Teléfono"
+                       Text="{Binding Telefono}"
+                       FontSize="18"
+                       TextColor="Black"
+                       Keyboard="Telephone" />
 
-            <Button Text="Cambiar Contraseña"
-                BackgroundColor="#FF9800"
-                TextColor="White"
-                FontAttributes="Bold"
-                CornerRadius="10"
-                HeightRequest="50"
-                Clicked="OnCambiarContrasenaClicked" />
+                <!-- Botón Guardar Cambios -->
+                <Button Text="Guardar Cambios"
+                        BackgroundColor="#66BB6A"
+                        TextColor="White"
+                        FontSize="18"
+                        Clicked="OnSaveChangesClicked" />
 
-            <Button Text="Cerrar Sesión"
-                BackgroundColor="#F44336"
-                TextColor="White"
-                FontAttributes="Bold"
-                CornerRadius="10"
-                HeightRequest="50"
-                Clicked="OnCerrarSesionClicked" />
-        </VerticalStackLayout>
-    </ScrollView>
+                <!-- Botón Cerrar Sesión -->
+                <Button Text="Cerrar Sesión"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        FontSize="18"
+                        Clicked="OnLogoutClicked" />
 
+                <!-- Indicador de carga -->
+                <ActivityIndicator x:Name="loadingIndicator"
+                                   IsRunning="False"
+                                   IsVisible="False"
+                                   HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

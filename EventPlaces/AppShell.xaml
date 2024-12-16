@@ -22,9 +22,13 @@
             Title="Mis Reservaciones"
             ContentTemplate="{DataTemplate eventPlaces:Reservados}"
             Route="Reservados" />
-    <!--<ShellContent
+    <ShellContent
             Title="Mis Pagos"
-            ContentTemplate="{DataTemplate pages:PagosPage}"
-            Route="PagosPage" />-->
+            ContentTemplate="{DataTemplate eventPlaces:Pagados}"
+            Route="Pagados" />
+    <ShellContent
+            Title="Perfil"
+            ContentTemplate="{DataTemplate pages:PerfilUsuario}"
+            Route="PerfilUsuario" />
 
 </Shell>

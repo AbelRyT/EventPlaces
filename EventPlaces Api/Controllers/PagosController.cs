@@ -22,7 +22,20 @@ public class PagosController : ControllerBase
         using (var connection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
         {
             connection.Open();
-            var sql = "SELECT id, reservacion_id, monto, fecha_pago, metodo_pago, estado FROM pagos";
+
+            var sql = @"
+            SELECT 
+                p.fecha_pago AS FechaPago, 
+                p.monto AS Monto, 
+                p.reservacion_id AS ReservacionId, 
+                l.nombre AS LugarNombre
+            FROM 
+                pagos p
+            INNER JOIN 
+                reservaciones r ON p.reservacion_id = r.id
+            INNER JOIN 
+                lugares l ON r.lugar_id = l.id";
+
             using (var command = new NpgsqlCommand(sql, connection))
             {
                 using (var reader = command.ExecuteReader())
@@ -31,12 +44,16 @@ public class PagosController : ControllerBase
                     {
                         pagos.Add(new PagoDto
                         {
-                            Id = reader.GetInt32(0),
-                            ReservacionId = reader.GetInt32(2),
-                            Monto = reader.GetDecimal(3),
-                            FechaPago = reader.GetDateTime(4),
-                            MetodoPago = reader.GetString(5),
-                            Estado = reader.GetString(6)
+                            FechaPago = reader.GetDateTime(reader.GetOrdinal("FechaPago")),
+                            Monto = Convert.ToDecimal(reader.GetString(reader.GetOrdinal("Monto"))),
+                            ReservacionId = reader.GetInt32(reader.GetOrdinal("ReservacionId")),
+                            ReservacionDto = new ReservacionDto
+                            {
+                                Lugar = new LugarDto
+                                {
+                                    Nombre = reader.GetString(reader.GetOrdinal("LugarNombre"))
+                                }
+                            }
                         });
                     }
                 }
@@ -44,6 +61,7 @@ public class PagosController : ControllerBase
         }
         return Ok(pagos);
     }
+
 
     // GET: api/Pagos/{id}
     [HttpGet("{id}")]

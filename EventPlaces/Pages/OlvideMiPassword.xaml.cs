@@ -1,3 +1,4 @@
+using Firebase.Auth;
 using System.Text.RegularExpressions;
 
 
@@ -11,33 +12,50 @@ public partial class OlvideMiPassword : ContentPage
     }
 
 
-    private async void OnEnviarInstruccionesClicked(object sender, EventArgs e)
+    private async void OnResetPasswordClicked(object sender, EventArgs e)
     {
-        string email = EmailEntry.Text;
+        string email = emailEntry.Text;
 
-        // Verifica si el campo está vacío
-        if (string.IsNullOrWhiteSpace(email))
+        // Validar correo electrónico
+        if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
         {
-            await DisplayAlert("Error", "Por favor, ingresa un correo electrónico.", "OK");
+            emailErrorLabel.Text = "Por favor, ingresa un correo válido.";
+            emailErrorLabel.IsVisible = true;
             return;
         }
-
-        // Verifica si el correo tiene un formato válido
-        if (!IsValidEmail(email))
+        else
         {
-            await DisplayAlert("Error", "Por favor, ingresa un correo electrónico válido.", "OK");
-            return;
+            emailErrorLabel.IsVisible = false;
         }
 
-        // Lógica para enviar el correo de restablecimiento de contraseña
-        await DisplayAlert("Instrucciones Enviadas", "Se han enviado las instrucciones de recuperación a tu correo electrónico.", "OK");
+        try
+        {
+            // Mostrar indicador de carga
+            loadingIndicator.IsRunning = true;
+            loadingIndicator.IsVisible = true;
+
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyDtL1yuMeyR4sDmXVD-xe7Z69ikiOZFvMY"));
+            await authProvider.SendPasswordResetEmailAsync(email);
+
+            await DisplayAlert("Éxito", "Se ha enviado un enlace de restablecimiento de contraseña a tu correo.", "OK");
+            await Navigation.PopAsync(); 
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"No se pudo enviar el correo: {ex.Message}", "OK");
+        }
+        finally
+        {
+            // Ocultar indicador de carga
+            loadingIndicator.IsRunning = false;
+            loadingIndicator.IsVisible = false;
+        }
     }
 
     private bool IsValidEmail(string email)
     {
-        // Expresión regular para validar el formato del correo electrónico
-        string emailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-        return Regex.IsMatch(email, emailRegex);
+        var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(email, emailPattern);
     }
 
     private async void OnLabelTapped(object sender, EventArgs e)

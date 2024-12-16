@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventPlaces.Event_Places.Pagados"
+             Title="Mis Pagos">
+
+    <!-- Fondo degradado de la página -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#f0f4f8" Offset="0.0" />
+            <GradientStop Color="#e0f7fa" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+            <!-- CollectionView para listar los pagos -->
+            <CollectionView ItemsSource="{Binding Pagos}" 
+                            Margin="0,10" 
+                            SelectionMode="None"
+                            VerticalOptions="FillAndExpand">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="15" Margin="0,10,0,5" HasShadow="True" CornerRadius="20" 
+                               BorderColor="Transparent" BackgroundColor="White"
+                               HorizontalOptions="FillAndExpand">
+
+                            <!-- Diseño del contenido -->
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="100, *" ColumnSpacing="15" HorizontalOptions="FillAndExpand">
+
+                                <!-- Imagen o icono representativo -->
+                                <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" CornerRadius="18" Padding="0" HasShadow="False" BackgroundColor="Transparent" BorderColor="Transparent">
+                                    <Image Source="payment_icon.png" 
+                                           Aspect="AspectFill" 
+                                           HeightRequest="80"
+                                           WidthRequest="80"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Frame>
+
+                                <!-- Nombre del lugar reservado -->
+                                <Label Text="{Binding ReservacionDto.Lugar.Nombre}"
+                                       Grid.Column="1"
+                                       FontAttributes="Bold" 
+                                       FontSize="18" 
+                                       TextColor="#00796B"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,5"/>
+
+                                <!-- Detalles del pago -->
+                                <StackLayout Grid.Column="1" Grid.Row="1" Spacing="3">
+                                    <Label Text="{Binding FechaPago, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
+                                           FontSize="14"
+                                           TextColor="#424242" />
+                                    <Label Text="{Binding ReservacionId, StringFormat='Reservación ID: {0}'}"
+                                           FontSize="14"
+                                           TextColor="#424242" />
+                                </StackLayout>
+
+                                <!-- Monto -->
+                                <Label Text="{Binding Monto, StringFormat='Monto: {0:C}'}"
+                                       Grid.Row="2" Grid.Column="1"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#00796B"
+                                       HorizontalOptions="End"
+                                       Margin="0,10,0,0" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

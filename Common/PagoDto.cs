@@ -9,6 +9,8 @@
         public DateTime FechaPago { get; set; }
         public string MetodoPago { get; set; }
         public string Estado { get; set; }
+
+        public ReservacionDto ReservacionDto { get; set; }
     }
 
 }
