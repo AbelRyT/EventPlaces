@@ -28,29 +28,28 @@
                                HorizontalOptions="FillAndExpand">
 
                             <!-- Diseño del contenido -->
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="100, *" ColumnSpacing="15" HorizontalOptions="FillAndExpand">
-
-                                <!-- Imagen o icono representativo -->
-                                <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" CornerRadius="18" Padding="0" HasShadow="False" BackgroundColor="Transparent" BorderColor="Transparent">
-                                    <Image Source="payment_icon.png" 
-                                           Aspect="AspectFill" 
-                                           HeightRequest="80"
-                                           WidthRequest="80"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
-                                </Frame>
+                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*, Auto" ColumnSpacing="15" HorizontalOptions="FillAndExpand">
 
                                 <!-- Nombre del lugar reservado -->
                                 <Label Text="{Binding ReservacionDto.Lugar.Nombre}"
-                                       Grid.Column="1"
+                                       Grid.Row="0" Grid.Column="0"
                                        FontAttributes="Bold" 
                                        FontSize="18" 
                                        TextColor="#00796B"
                                        VerticalOptions="Start"
-                                       Margin="0,0,0,5"/>
+                                       Margin="0,0,0,5" />
+
+                                <!-- Monto -->
+                                <Label Text="{Binding Monto, StringFormat='Monto: {0:C}'}"
+                                       Grid.Row="0" Grid.Column="1"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#00796B"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center" />
 
                                 <!-- Detalles del pago -->
-                                <StackLayout Grid.Column="1" Grid.Row="1" Spacing="3">
+                                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="3">
                                     <Label Text="{Binding FechaPago, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
                                            FontSize="14"
                                            TextColor="#424242" />
@@ -58,15 +57,6 @@
                                            FontSize="14"
                                            TextColor="#424242" />
                                 </StackLayout>
-
-                                <!-- Monto -->
-                                <Label Text="{Binding Monto, StringFormat='Monto: {0:C}'}"
-                                       Grid.Row="2" Grid.Column="1"
-                                       FontAttributes="Bold"
-                                       FontSize="16"
-                                       TextColor="#00796B"
-                                       HorizontalOptions="End"
-                                       Margin="0,10,0,0" />
                             </Grid>
                         </Frame>
                     </DataTemplate>

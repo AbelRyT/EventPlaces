@@ -41,7 +41,8 @@ public partial class PagoReserva : ContentPage
                 FechaPago = DateTime.Now,
                 Monto = Reservacion.PrecioTotal,
                 MetodoPago = "TARJETA",
-                Estado = "PAGADO"
+                Estado = "PAGADO",
+                ReservacionDto = Reservacion
             };
 
             var json = JsonSerializer.Serialize(pago);
@@ -61,7 +62,7 @@ public partial class PagoReserva : ContentPage
             else
             {
                 var errorResponse = await response.Content.ReadAsStringAsync();
-                await DisplayAlert("Error", $"Error al registrar en la API: {errorResponse}", "OK");
+                await DisplayAlert("Error", $"{errorResponse}", "OK");
                 btnPagar.IsEnabled = true;
                 loadingIndicator.IsRunning = false;
                 loadingIndicator.IsVisible = false;

@@ -24,6 +24,14 @@ public partial class Pagados : ContentPage
         _ = LoadPagosAsync();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Recargar los datos cada vez que se muestra la página
+        _ = LoadPagosAsync();
+    }
+
     private async Task LoadPagosAsync()
     {
         try

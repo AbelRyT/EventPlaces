@@ -26,6 +26,13 @@ namespace EventPlaces.Event_Places
             _ = LoadReservacionesAsync();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Recargar los datos cada vez que se muestra la página
+            _ = LoadReservacionesAsync();
+        }
         private async Task LoadReservacionesAsync()
         {
             try
