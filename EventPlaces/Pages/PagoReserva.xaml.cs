@@ -53,7 +53,7 @@ public partial class PagoReserva : ContentPage
 
             if (response.IsSuccessStatusCode)
             {
-                await Shell.Current.Navigation.PushModalAsync(new VolantePagoPage(Reservacion));
+                await Navigation.PushModalAsync(new VolantePagoPage(Reservacion));
                 btnPagar.IsEnabled = true;
                 loadingIndicator.IsRunning = false;
                 loadingIndicator.IsVisible = false;
