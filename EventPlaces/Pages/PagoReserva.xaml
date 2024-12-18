@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:EventPlaces.Behaviors"
              x:Class="EventPlaces.Pages.PagoReserva"
- Title="Pagar Reserva">
+             Title="Pagar Reserva">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -12,10 +13,10 @@
     </ContentPage.Background>
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15" Padding="20">
+        <VerticalStackLayout Spacing="20" Padding="20">
 
             <!-- Información de la reserva -->
-            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" Margin="0,0,0,15">
+            <Frame BackgroundColor="White" CornerRadius="15" Padding="20" Margin="0,0,0,20" HasShadow="True">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="{Binding Lugar.Nombre}"
                            FontAttributes="Bold"
@@ -24,10 +25,10 @@
                     <Label Text="{Binding FechaFormatted}"
                            FontSize="16"
                            TextColor="Gray" />
-                    <Label Text="{Binding Lugar.PrecioPorDia, StringFormat=Precio Dia: {0}}"
+                    <Label Text="{Binding Lugar.PrecioPorDia, StringFormat=Precio Día: {0:C}}"
                            FontSize="14"
                            TextColor="Black" />
-                    <Label Text="{Binding PrecioTotal, StringFormat=Precio Total: {0}}"
+                    <Label Text="{Binding PrecioTotal, StringFormat=Precio Total: {0:C}}"
                            FontAttributes="Bold"
                            FontSize="18"
                            TextColor="Green" />
@@ -37,30 +38,42 @@
             <!-- Formulario de pago -->
             <Label Text="Detalles de Pago"
                    FontAttributes="Bold"
-                   FontSize="18"
-                   TextColor="Black"
-                   Margin="0,0,0,10" />
+                   FontSize="20"
+                   TextColor="Black" />
 
+            <!-- Número de tarjeta con máscara -->
             <Entry Placeholder="Número de tarjeta"
                    Keyboard="Numeric"
-                   MaxLength="16"
+                   MaxLength="19"
                    BackgroundColor="#f0f0f0"
-                   TextColor="Black" />
-            <Label Text="* Ingrese un número válido" 
-                   TextColor="Red" 
-                   IsVisible="False" 
+                   TextColor="Black"
+                   x:Name="NumeroTarjetaEntry">
+                <Entry.Behaviors>
+                    <local:CardNumberValidationBehavior />
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="* Ingrese un número válido"
+                   TextColor="Red"
+                   IsVisible="False"
                    x:Name="ErrorTarjeta" />
 
+            <!-- Nombre en la tarjeta -->
             <Entry Placeholder="Nombre en la tarjeta"
                    BackgroundColor="#f0f0f0"
                    TextColor="Black" />
 
+            <!-- Fecha de vencimiento y CVV -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                 <Entry Placeholder="MM/AA"
                        Keyboard="Numeric"
                        BackgroundColor="#f0f0f0"
                        TextColor="Black"
-                       Grid.Column="0" />
+                       MaxLength="5"
+                       x:Name="FechaExpiracionEntry">
+                    <Entry.Behaviors>
+                        <local:CardDateValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
 
                 <Entry Placeholder="CVV"
                        Keyboard="Numeric"
@@ -75,7 +88,7 @@
                                IsVisible="False" 
                                HorizontalOptions="Center" 
                                VerticalOptions="Center"
-                               Color="Blue"/>
+                               Color="Blue" />
 
             <!-- Botón de pago -->
             <Button x:Name="btnPagar"

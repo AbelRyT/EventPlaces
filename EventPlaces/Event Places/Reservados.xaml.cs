@@ -16,7 +16,6 @@ namespace EventPlaces.Event_Places
         public Reservados()
         {
             InitializeComponent();
-
             HttpClientHandler handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true

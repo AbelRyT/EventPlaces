@@ -58,7 +58,8 @@ public partial class ReservacionPage : ContentPage
             loadingIndicator.IsVisible = false;
             btnConfirmar.IsEnabled = true;
 
-            await Navigation.PushAsync(new Reservados());
+            await Shell.Current.GoToAsync("//Reservados");
+
 
         }
         else
@@ -67,7 +68,7 @@ public partial class ReservacionPage : ContentPage
             btnConfirmar.IsEnabled = true;
             loadingIndicator.IsRunning = false;
             loadingIndicator.IsVisible = false;
-            await DisplayAlert("Error", $"Error al registrar en la API: {errorResponse}", "OK");
+            await DisplayAlert("Error", $"{errorResponse}", "OK");
         }
 
 

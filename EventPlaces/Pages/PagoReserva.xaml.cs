@@ -56,7 +56,7 @@ public partial class PagoReserva : ContentPage
                 btnPagar.IsEnabled = true;
                 loadingIndicator.IsRunning = false;
                 loadingIndicator.IsVisible = false;
-                await Navigation.PushAsync(new MenuPrincipal());
+                await Shell.Current.GoToAsync("//Pagados");
             }
             else
             {
@@ -73,7 +73,7 @@ public partial class PagoReserva : ContentPage
             btnPagar.IsEnabled = true;
             loadingIndicator.IsRunning = false;
             loadingIndicator.IsVisible = false;
-            await Navigation.PushAsync(new MenuPrincipal());
+            await Shell.Current.GoToAsync("//Pagados");
         }
     }
 }

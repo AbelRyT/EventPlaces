@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EventPlaces.Event_Places.MenuPrincipal"
-             Title="Reservaciones"
+             Title="Lugares"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Background>
@@ -17,38 +17,10 @@
         <SearchBar Placeholder="Buscar lugar..."
                Text="{Binding SearchText}"
                SearchCommand="{Binding SearchCommand}"
-               Grid.Row="0" />
+               Grid.Row="0"
+                   BackgroundColor="White"/>
 
-        <!-- Botones de búsqueda -->
-        <Grid Padding="10" ColumnDefinitions="3*,0*" RowDefinitions="Auto" Grid.Row="1">
-            <!-- Botón Buscar -->
-            <Frame BackgroundColor="#F0F0F0"
-               CornerRadius="25"
-               Padding="0"
-               BorderColor="Black"
-               HasShadow="True"
-               Grid.Column="0">
-                <Grid Padding="10"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="Center"
-                  ColumnDefinitions="Auto, *">
-                    <!-- Ícono de búsqueda (Material Icons) -->
-                    <Label Text="&#xe8b6;"
-                       FontFamily="MaterialIcons"
-                       FontSize="20"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       TextColor="Black" />
-                    <!-- Texto "Buscar" centrado -->
-                    <Label Text="                                Buscar"
-                       FontSize="16"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       TextColor="Black" />
-                </Grid>
-            </Frame>
-        </Grid>
-
+  
         <!-- Lista de Reservaciones -->
         <CollectionView Grid.Row="2"
             ItemsSource="{Binding FilteredLugares}"

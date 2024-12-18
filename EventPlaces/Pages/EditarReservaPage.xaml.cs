@@ -51,7 +51,7 @@ public partial class EditarReservaPage : ContentPage
             btnGuardar.IsEnabled = true;
             btnCancelar.IsEnabled = true;
 
-            await Navigation.PushAsync(new Reservados());
+            await Shell.Current.GoToAsync("//Reservados");
 
         }
         else
@@ -89,7 +89,7 @@ public partial class EditarReservaPage : ContentPage
                 btnGuardar.IsEnabled = true;
                 btnCancelar.IsEnabled = true;
 
-                await Navigation.PushAsync(new Reservados());
+                await Shell.Current.GoToAsync("//Reservados");
             }
             else
             {
